@@ -8,17 +8,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name="departments")
+@Table(name = "departments")
 public class Department {
+
     @Id
     @NotNull
     @Column(name = "id")
@@ -32,6 +28,5 @@ public class Department {
     @Column(name = "dep_name")
     @NotNull(message = "Department should be named.")
     private String depName;
-
 
 }

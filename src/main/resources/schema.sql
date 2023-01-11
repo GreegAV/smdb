@@ -25,7 +25,6 @@ assigned_to int);
 ALTER TABLE software ADD CONSTRAINT fk_software_employees FOREIGN KEY (assigned_to) REFERENCES employees (id);
 
 
-
 insert into departments (id, dep_code, dep_name)
 values
 (1, 'IT', 'Information Technology'),
@@ -38,7 +37,8 @@ values
 (1, 'John', 'Dow', 1, 'john.dow@it.levi9.com'),
 (2, 'Mary', 'Smith', 2, 'marysmith@finance.levi9.com'),
 (3, 'Ann', 'Flower', 3, 'ann.flower@hr.levi9.com'),
-(4, 'Mike', 'Harder', 4, 'mike.harder@support.levi9.com');
+(4, 'Mike', 'Harder', 4, 'mike.harder@support.levi9.com'),
+(5, 'Alex', 'Trainer', 3, 'alex.trainer@hr.levi9.com');
 
 insert into software  (id, soft_name , serial, assigned_to)
 values
@@ -52,11 +52,7 @@ values
 (8, 'Microsoft Office', 'MSO-365', 2),
 (9, 'Teamviewer', 'TEAM-23', 4);
 
-select * from employees e;
 
-select * from departments d;
-
-select * from software s;
 
 
 
