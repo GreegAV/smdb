@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.levi9.smdb.entity.Department;
+import com.levi9.smdb.dto.DepartmentDTO;
 import com.levi9.smdb.repository.DepartmentRepository;
 
 @Service
@@ -20,7 +20,7 @@ public class DepartmentService {
         return String.valueOf(departmentRepository.count());
     }
 
-    public List<Department> getAllDepartments() {
+    public List<DepartmentDTO> getAllDepartments() {
         return departmentRepository.getAllDepartments();
     }
 }

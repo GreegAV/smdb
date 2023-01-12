@@ -13,6 +13,7 @@
         <th>Department ID</th>
         <th>Department name</th>
         <th>Department code</th>
+        <th>Persons work here</th>
     </tr>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
         <td align="center" th:text="${department.id}">Department ID</td>
         <td th:text="${department.depName}">Department name</td>
         <td th:text="${department.depCode}">Department code</td>
+        <td th:text="${department.working}">Work here</td>
     </tr>
     </tbody>
 </table>

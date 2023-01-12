@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.levi9.smdb.dto.DepartmentDTO;
 import com.levi9.smdb.dto.EmployeeDTO;
 import com.levi9.smdb.dto.SoftwareDTO;
-import com.levi9.smdb.entity.Department;
 import com.levi9.smdb.service.DepartmentService;
 import com.levi9.smdb.service.EmployeeService;
 import com.levi9.smdb.service.SoftwareService;
@@ -47,7 +47,7 @@ public class SMDBController {
 
     @GetMapping("/departments")
     public String departments(Model model) {
-        List<Department> departments = departmentService.getAllDepartments();
+        List<DepartmentDTO> departments = departmentService.getAllDepartments();
         model.addAttribute("departments", departments);
         return "departments";
     }
