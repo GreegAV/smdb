@@ -1,7 +1,10 @@
 package com.levi9.smdb.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.levi9.smdb.entity.Department;
 import com.levi9.smdb.repository.DepartmentRepository;
 
 @Service
@@ -14,6 +17,10 @@ public class DepartmentService {
     }
 
     public String countDepartments() {
-        return String.valueOf(departmentRepository.departmentsQuantity());
+        return String.valueOf(departmentRepository.count());
+    }
+
+    public List<Department> getAllDepartments() {
+        return departmentRepository.getAllDepartments();
     }
 }

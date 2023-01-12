@@ -1,7 +1,10 @@
 package com.levi9.smdb.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.levi9.smdb.dto.EmployeeDTO;
 import com.levi9.smdb.repository.EmployeeRepository;
 
 @Service
@@ -14,6 +17,10 @@ public class EmployeeService {
     }
 
     public String countEmployees() {
-        return String.valueOf(employeeRepository.countEmployees());
+        return String.valueOf(employeeRepository.count());
+    }
+
+    public List<EmployeeDTO> getAllEmployees() {
+        return employeeRepository.getAllEmployees();
     }
 }

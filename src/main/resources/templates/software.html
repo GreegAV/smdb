@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>Software list</title>
+</head>
+<body>
+<h1 align="center">Software :</h1>
+<br>
+<table align="center" border="1" cellpadding="5" cellspacing="2">
+    <thead>
+    <tr>
+        <th>Software ID</th>
+        <th>Software Name</th>
+        <th>Assigned Employee</th>
+        <th>Serial Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="soft : ${software}">
+        <td align="center" th:text="${soft.id}"></td>
+        <td th:text="${soft.softName}"></td>
+        <td th:text="${soft.assigned}"></td>
+        <td th:text="${soft.serial}"></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<p align="center">
+    <a href="/">Start page</a>
+</p>
+
+</body>
+</html>

@@ -1,7 +1,10 @@
 package com.levi9.smdb.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.levi9.smdb.dto.SoftwareDTO;
 import com.levi9.smdb.repository.SoftwareRepository;
 
 @Service
@@ -14,6 +17,10 @@ public class SoftwareService {
     }
 
     public String countSoftwares() {
-        return String.valueOf(softwareRepository.softwareQuantity());
+        return String.valueOf(softwareRepository.count());
+    }
+
+    public List<SoftwareDTO> getAllSoftware() {
+        return softwareRepository.getAllSoftware();
     }
 }
