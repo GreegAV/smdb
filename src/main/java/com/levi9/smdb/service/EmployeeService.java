@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.levi9.smdb.dto.EmployeeDTO;
+import com.levi9.smdb.entity.Employee;
 import com.levi9.smdb.repository.EmployeeRepository;
 
 @Service
@@ -26,5 +27,14 @@ public class EmployeeService {
 
     public EmployeeDTO getEmployeeDetailById(Long id) {
         return employeeRepository.getEmployeeById(id);
+    }
+
+    public boolean validateInput(String firstName, String lastName, String department, String email) {
+        return true;
+    }
+
+    public void saveNewEmployee(Employee employee) {
+        employeeRepository.save(employee);
+
     }
 }

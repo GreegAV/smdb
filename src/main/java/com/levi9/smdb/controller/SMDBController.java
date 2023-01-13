@@ -6,10 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.levi9.smdb.dto.DepartmentDTO;
 import com.levi9.smdb.dto.EmployeeDTO;
 import com.levi9.smdb.dto.SoftwareDTO;
+import com.levi9.smdb.entity.Employee;
 import com.levi9.smdb.service.DepartmentService;
 import com.levi9.smdb.service.EmployeeService;
 import com.levi9.smdb.service.SoftwareService;
@@ -30,6 +33,26 @@ public class SMDBController {
     @GetMapping("/")
     public String startPage() {
         return "index";
+    }
+
+    @PostMapping("/addemployee")
+    public String addEmployeePerform(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
+            @RequestParam("department") String department, @RequestParam("email") String email, Model model) {
+        if (employeeService.validateInput(firstName, lastName, department, email)) {
+            Employee employee = new Employee();
+            employee.setFirstName(firstName);
+            employee.setLastName(lastName);
+            employee.setEmail(email);
+            employee.setDepartment(departmentService.getDeptIdByCode(department));
+            employeeService.saveNewEmployee(employee);
+        }
+
+        return "redirect:/employees";
+    }
+
+    @GetMapping("/addemployee")
+    public String addEmployee() {
+        return "addemployee";
     }
 
     @GetMapping("/employees")

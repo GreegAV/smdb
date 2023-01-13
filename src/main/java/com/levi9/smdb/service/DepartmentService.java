@@ -23,4 +23,8 @@ public class DepartmentService {
     public List<DepartmentDTO> getAllDepartments() {
         return departmentRepository.getAllDepartments();
     }
+
+    public Long getDeptIdByCode(String department) {
+        return departmentRepository.getDeptIdByDeptCode(department.toUpperCase());
+    }
 }
