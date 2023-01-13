@@ -20,11 +20,14 @@
     <tr th:each="software : ${soft}">
         <td align="center" th:text="${software.id}"></td>
         <td th:text="${software.softName}"></td>
-        <td th:text="${software.assigned}"></td>
+        <td><a th:href="|/employee/${software.assignedTo}|"><span th:text="${software.assignedName}"></span></a></td>
         <td th:text="${software.serial}"></td>
     </tr>
     </tbody>
 </table>
+<br>
+<input type="button" title="Add software">
+<br>
 <br>
 <br>
 <p align="center">

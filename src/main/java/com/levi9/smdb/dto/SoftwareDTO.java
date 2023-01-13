@@ -8,5 +8,6 @@ public interface SoftwareDTO {
 
     String getSerial();
 
-    String getAssigned();
+    String getAssignedName();
+    Long getAssignedTo();
 }
