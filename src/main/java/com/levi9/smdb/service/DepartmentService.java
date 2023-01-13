@@ -24,4 +24,8 @@ public class DepartmentService {
         return departmentRepository.getAllDepartments();
     }
 
+    public Long getDepIdByDepCode(String depCode) {
+        return departmentRepository.getAllDepartments().stream().filter(dept -> dept.getDepCode().equalsIgnoreCase(depCode)).findFirst()
+                .map(DepartmentDTO::getId).orElse(null);
+    }
 }

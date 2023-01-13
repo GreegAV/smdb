@@ -37,15 +37,13 @@ public class SMDBController {
 
     @PostMapping("/addemployee")
     public String addEmployeePerform(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
-            @RequestParam("department") String department, @RequestParam("email") String email, Model model) {
+            @RequestParam("department") String department, @RequestParam("email") String email) {
         if (employeeService.validateInput(firstName, lastName, department, email)) {
             Employee employee = new Employee();
             employee.setFirstName(firstName);
             employee.setLastName(lastName);
             employee.setEmail(email);
-            List<DepartmentDTO> depts = departmentService.getAllDepartments();
-            depts.stream().filter(dto -> dto.getDepCode().equalsIgnoreCase(department)).findFirst()
-                    .ifPresent(dto -> employee.setDepartment(dto.getId()));
+            employee.setDepartment(departmentService.getDepIdByDepCode(department.toUpperCase()));
             employeeService.saveNewEmployee(employee);
         } else {
             return "error";
