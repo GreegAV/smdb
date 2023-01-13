@@ -3,12 +3,12 @@ DROP TABLE IF exists employees;
 DROP TABLE IF exists departments;
 
 create table departments (
-id serial primary key not null,
+id serial primary key,
 dep_code varchar,
 dep_name varchar);
 
 create table employees (
-id serial primary key not null,
+id serial primary key,
 first_name varchar,
 last_name varchar,
 department_id int,
@@ -17,7 +17,7 @@ email varchar);
 ALTER TABLE employees ADD CONSTRAINT fk_employees_departments FOREIGN KEY (department_id) REFERENCES departments (id);
 
 create table software (
-id serial primary key not null,
+id serial primary key ,
 soft_name varchar,
 serial varchar,
 assigned_to int);
