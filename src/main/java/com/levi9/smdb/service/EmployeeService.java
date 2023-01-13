@@ -1,7 +1,9 @@
 package com.levi9.smdb.service;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +33,11 @@ public class EmployeeService {
     }
 
     public boolean validateInput(String firstName, String lastName, String department, String email) {
-        return true;
+        String word = "\\w+\\s?\\w+";
+        return Pattern.matches(word, firstName) &&
+                Pattern.matches(word, lastName) &&
+                Pattern.matches(word, department) &&
+                EmailValidator.getInstance().isValid(email);
     }
 
     @Transactional

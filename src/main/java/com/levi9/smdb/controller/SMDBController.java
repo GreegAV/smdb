@@ -47,8 +47,9 @@ public class SMDBController {
             depts.stream().filter(dto -> dto.getDepCode().equalsIgnoreCase(department)).findFirst()
                     .ifPresent(dto -> employee.setDepartment(dto.getId()));
             employeeService.saveNewEmployee(employee);
+        } else {
+            return "error";
         }
-
         return "redirect:/employees";
     }
 
