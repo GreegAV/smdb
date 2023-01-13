@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.levi9.smdb.dto.SoftwareDTO;
@@ -15,4 +16,7 @@ public interface SoftwareRepository extends CrudRepository<Software, Long> {
     @Query(value = "select s.id, s.soft_name as softName, concat( e.first_name,' ', e.last_name) as assigned, s.serial from software s left join "
             + "employees e on s.assigned_to=e.id ", nativeQuery = true)
     List<SoftwareDTO> getAllSoftware();
+
+    @Query(value = "select s.soft_name as softName, s.serial from software s join employees e on e.id=s.assigned_to where e.id=?1", nativeQuery = true)
+    List<SoftwareDTO> getSoftwareByEmployee(@Param("id") Long id);
 }

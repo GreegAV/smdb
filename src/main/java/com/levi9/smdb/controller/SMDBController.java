@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.levi9.smdb.dto.DepartmentDTO;
 import com.levi9.smdb.dto.EmployeeDTO;
@@ -38,10 +39,19 @@ public class SMDBController {
         return "employees";
     }
 
+    @GetMapping("/employee/{id}")
+    public String employee(@PathVariable("id") Long id, Model model) {
+        EmployeeDTO employee = employeeService.getEmployeeDetailById(id);
+        List<SoftwareDTO> software = softwareService.getSoftwareByEmployee(id);
+        model.addAttribute("employee", employee);
+        model.addAttribute("software", software);
+        return "employee";
+    }
+
     @GetMapping("/software")
     public String software(Model model) {
         List<SoftwareDTO> software = softwareService.getAllSoftware();
-        model.addAttribute("software", software);
+        model.addAttribute("soft", software);
         return "software";
     }
 

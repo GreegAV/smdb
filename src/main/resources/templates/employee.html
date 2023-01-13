@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>Employees list</title>
+</head>
+<body>
+<h1 align="center">Employee details</h1>
+<br>
+<br>
+<table cellspacing="2" cellpadding="5" align="center" border="2">
+    <tr>
+        <td>Id:</td><td><span th:text="${employee.id}">ID</span></td>
+    </tr>
+    <tr>
+        <td>Name:</td><td><span th:text="${employee.firstName}">ID</span></td>
+    </tr>
+    <tr>
+        <td>Surname:</td>
+        <td><span th:text="${employee.lastName}">ID</span></td>
+    </tr>
+    <tr>
+        <td>Department:</td>
+        <td><span th:text="${employee.department}">ID</span></td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td><span th:text="${employee.email}">ID</span></td>
+    </tr>
+    <tr>
+        <td>Software:</td>
+        <td>
+            <div th:each="soft : ${software}">
+                &diams; <span th:text="${soft.softName}"></span>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<br>
+<br>
+<p align="center">
+    <a href="/">Start page</a>
+</p>
+</body>
+</html>

@@ -17,11 +17,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="soft : ${software}">
-        <td align="center" th:text="${soft.id}"></td>
-        <td th:text="${soft.softName}"></td>
-        <td th:text="${soft.assigned}"></td>
-        <td th:text="${soft.serial}"></td>
+    <tr th:each="software : ${soft}">
+        <td align="center" th:text="${software.id}"></td>
+        <td th:text="${software.softName}"></td>
+        <td th:text="${software.assigned}"></td>
+        <td th:text="${software.serial}"></td>
     </tr>
     </tbody>
 </table>

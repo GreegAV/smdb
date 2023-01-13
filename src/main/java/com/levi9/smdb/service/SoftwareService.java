@@ -23,4 +23,8 @@ public class SoftwareService {
     public List<SoftwareDTO> getAllSoftware() {
         return softwareRepository.getAllSoftware();
     }
+
+    public List<SoftwareDTO> getSoftwareByEmployee(Long id) {
+        return softwareRepository.getSoftwareByEmployee(id);
+    }
 }

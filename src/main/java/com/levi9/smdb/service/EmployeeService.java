@@ -23,4 +23,8 @@ public class EmployeeService {
     public List<EmployeeDTO> getAllEmployees() {
         return employeeRepository.getAllEmployees();
     }
+
+    public EmployeeDTO getEmployeeDetailById(Long id) {
+        return employeeRepository.getEmployeeById(id);
+    }
 }
