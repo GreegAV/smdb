@@ -1,5 +1,6 @@
 package com.levi9.smdb.entity;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import jakarta.persistence.Column;
@@ -21,11 +22,11 @@ public class Software {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotEmpty(message = "Software should have a name.")
     @Column(name = "soft_name")
     private String softName;
 
-    @NotNull
+    @NotEmpty(message = "Software should have a serial number.")
     @Column(name = "serial")
     private String serial;
 

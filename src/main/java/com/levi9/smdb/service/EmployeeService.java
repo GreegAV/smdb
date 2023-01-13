@@ -3,6 +3,7 @@ package com.levi9.smdb.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.levi9.smdb.dto.EmployeeDTO;
 import com.levi9.smdb.entity.Employee;
@@ -33,8 +34,8 @@ public class EmployeeService {
         return true;
     }
 
+    @Transactional
     public void saveNewEmployee(Employee employee) {
         employeeRepository.save(employee);
-
     }
 }

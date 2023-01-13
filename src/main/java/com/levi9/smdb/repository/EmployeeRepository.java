@@ -18,6 +18,6 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     List<EmployeeDTO> getAllEmployees();
 
     @Query(value = "select e.id, e.first_name as firstName, e.last_name as lastName, d.dep_name as department, e.email "
-            + "from employees e join departments d on e.department_id=d.id where e.id=?1", nativeQuery = true)
+            + "from employees e join departments d on e.department_id=d.id where e.id=:id", nativeQuery = true)
     EmployeeDTO getEmployeeById(@Param("id") Long id);
 }

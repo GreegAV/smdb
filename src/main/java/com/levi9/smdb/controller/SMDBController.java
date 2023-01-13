@@ -43,7 +43,9 @@ public class SMDBController {
             employee.setFirstName(firstName);
             employee.setLastName(lastName);
             employee.setEmail(email);
-            employee.setDepartment(departmentService.getDeptIdByCode(department));
+            List<DepartmentDTO> depts = departmentService.getAllDepartments();
+            depts.stream().filter(dto -> dto.getDepCode().equalsIgnoreCase(department)).findFirst()
+                    .ifPresent(dto -> employee.setDepartment(dto.getId()));
             employeeService.saveNewEmployee(employee);
         }
 

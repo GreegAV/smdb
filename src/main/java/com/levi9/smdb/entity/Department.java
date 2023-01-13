@@ -1,5 +1,6 @@
 package com.levi9.smdb.entity;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import jakarta.persistence.Column;
@@ -22,11 +23,11 @@ public class Department {
     private Long id;
 
     @Column(name = "dep_code")
-    @NotNull(message = "Department should be with code.")
+    @NotEmpty(message = "Department should be with code.")
     private String depCode;
 
     @Column(name = "dep_name")
-    @NotNull(message = "Department should be named.")
+    @NotEmpty(message = "Department should be named.")
     private String depName;
 
 }

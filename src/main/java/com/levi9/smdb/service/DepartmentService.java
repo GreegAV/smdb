@@ -24,7 +24,4 @@ public class DepartmentService {
         return departmentRepository.getAllDepartments();
     }
 
-    public Long getDeptIdByCode(String department) {
-        return departmentRepository.getDeptIdByDeptCode(department.toUpperCase());
-    }
 }
