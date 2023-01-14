@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.levi9.smdb.dto.DepartmentDTO;
 import com.levi9.smdb.dto.EmployeeDTO;
 import com.levi9.smdb.dto.SoftwareDTO;
+import com.levi9.smdb.entity.Department;
 import com.levi9.smdb.entity.Employee;
 import com.levi9.smdb.service.DepartmentService;
 import com.levi9.smdb.service.EmployeeService;
@@ -54,6 +55,23 @@ public class SMDBController {
     @GetMapping("/addemployee")
     public String addEmployee() {
         return "addemployee";
+    }
+    @PostMapping("/adddepartment")
+    public String addDepartmentPerform(@RequestParam("depName") String depName, @RequestParam("depCode") String depCode) {
+        if (departmentService.validateInput(depName, depCode)) {
+            Department department = new Department();
+            department.setDepName(depName);
+            department.setDepCode(depCode);
+            departmentService.saveNewDepartment(department);
+        } else {
+            return "error";
+        }
+        return "redirect:/departments";
+    }
+
+    @GetMapping("/adddepartment")
+    public String adddepartment() {
+        return "adddepartment";
     }
 
     @GetMapping("/employees")
