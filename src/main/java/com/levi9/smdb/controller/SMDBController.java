@@ -14,6 +14,7 @@ import com.levi9.smdb.dto.EmployeeDTO;
 import com.levi9.smdb.dto.SoftwareDTO;
 import com.levi9.smdb.entity.Department;
 import com.levi9.smdb.entity.Employee;
+import com.levi9.smdb.entity.Software;
 import com.levi9.smdb.service.DepartmentService;
 import com.levi9.smdb.service.EmployeeService;
 import com.levi9.smdb.service.SoftwareService;
@@ -21,6 +22,7 @@ import com.levi9.smdb.service.SoftwareService;
 @Controller
 public class SMDBController {
 
+    private static final String ERROR = "error";
     private final DepartmentService departmentService;
     private final SoftwareService softwareService;
     private final EmployeeService employeeService;
@@ -47,7 +49,7 @@ public class SMDBController {
             employee.setDepartmentId(departmentService.getDepIdByDepCode(department.toUpperCase()));
             employeeService.saveNewEmployee(employee);
         } else {
-            return "error";
+            return ERROR;
         }
         return "redirect:/employees";
     }
@@ -56,6 +58,7 @@ public class SMDBController {
     public String addEmployee() {
         return "addemployee";
     }
+
     @PostMapping("/adddepartment")
     public String addDepartmentPerform(@RequestParam("depName") String depName, @RequestParam("depCode") String depCode) {
         if (departmentService.validateInput(depName, depCode)) {
@@ -64,7 +67,7 @@ public class SMDBController {
             department.setDepCode(depCode);
             departmentService.saveNewDepartment(department);
         } else {
-            return "error";
+            return ERROR;
         }
         return "redirect:/departments";
     }
@@ -72,6 +75,24 @@ public class SMDBController {
     @GetMapping("/adddepartment")
     public String adddepartment() {
         return "adddepartment";
+    }
+
+    @PostMapping("/addsoftware")
+    public String addSoftwarePerform(@RequestParam("softName") String softName, @RequestParam("serial") String serial) {
+        if (softwareService.validateInput(softName)) {
+            Software software = new Software();
+            software.setSoftName(softName);
+            software.setSerial(serial);
+            softwareService.saveNewSoftware(software);
+        } else {
+            return ERROR;
+        }
+        return "redirect:/software";
+    }
+
+    @GetMapping("/addsoftware")
+    public String addSoftware() {
+        return "addsoftware";
     }
 
     @GetMapping("/employees")
