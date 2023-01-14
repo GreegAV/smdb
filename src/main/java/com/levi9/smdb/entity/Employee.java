@@ -29,9 +29,9 @@ public class Employee {
     @Column(name = "last_name")
     @NotEmpty(message = "Employee should have last name.")
     private String lastName;
-    @Column(name = "department")
+    @Column(name = "department_id")
     @NotEmpty(message = "Employee should work somewhere.")
-    private Long department;
+    private Long departmentId;
 
     @Column(name = "email")
     @Email

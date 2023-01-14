@@ -43,7 +43,7 @@ public class SMDBController {
             employee.setFirstName(firstName);
             employee.setLastName(lastName);
             employee.setEmail(email);
-            employee.setDepartment(departmentService.getDepIdByDepCode(department.toUpperCase()));
+            employee.setDepartmentId(departmentService.getDepIdByDepCode(department.toUpperCase()));
             employeeService.saveNewEmployee(employee);
         } else {
             return "error";
