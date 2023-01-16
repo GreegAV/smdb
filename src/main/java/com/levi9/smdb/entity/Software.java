@@ -3,12 +3,7 @@ package com.levi9.smdb.entity;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -32,5 +27,9 @@ public class Software {
 
     @Column(name = "assigned_to")
     private Long assignedTo;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
 }

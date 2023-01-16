@@ -84,6 +84,17 @@
 					</excludes>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    mvn compile com.google.cloud.tools:job-maven-plugin:3.3.1:build -Dimage=registry.hub.docker.com/greegav/benchstudy
+
+                    <to><image>registry.hub.docker.com/greegav/benchstudy</image></to>
+                    <allowInsecureRegistries>true</allowInsecureRegistries>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 
