@@ -45,7 +45,7 @@ public class DepartmentService {
 
     public boolean validateDepartment(String department) {
         Set<String> depCodes = departmentRepository.getDepartmentCodes();
-        return depCodes.stream().anyMatch(depCode -> depCode.equalsIgnoreCase(department));
+        return depCodes.stream().anyMatch(depCode -> depCode.equalsIgnoreCase(department.trim()));
     }
 
     public boolean validateEmail(String department, String email) {

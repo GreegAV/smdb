@@ -32,7 +32,7 @@ public class EmployeeService {
     }
 
     public boolean validateInput(String firstName, String lastName, String department, String email) {
-        String word = "\\w+\\s?\\w+";
+        String word = "([a-zA-Z]\\s?)*+";
         boolean validNames = Pattern.matches(word, firstName) && Pattern.matches(word, lastName);
         boolean validDepartment = departmentService.validateDepartment(department);
         boolean validEmail = departmentService.validateEmail(department, email);
