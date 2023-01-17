@@ -1,6 +1,7 @@
 package com.levi9.smdb.service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
@@ -36,6 +37,23 @@ public class DepartmentService {
     }
 
     public void saveNewDepartment(Department department) {
+        String depCode = department.getDepCode();
+        depCode = depCode.substring(0, 1).toUpperCase() + depCode.substring(1);
+        department.setDepCode(depCode);
         departmentRepository.save(department);
+    }
+
+    public boolean validateDepartment(String department) {
+        Set<String> depCodes = departmentRepository.getDepartmentCodes();
+        return depCodes.stream().anyMatch(depCode -> depCode.equalsIgnoreCase(department));
+    }
+
+    public boolean validateEmail(String department, String email) {
+        Set<String> depCodes = departmentRepository.getDepartmentCodes();
+        String depCodeFromEmail = email.substring(email.indexOf("@") + 1, email.indexOf("."));
+        boolean validDepartmentInEmail =
+                depCodes.stream().anyMatch(depCode -> depCode.equalsIgnoreCase(depCodeFromEmail) && depCode.equalsIgnoreCase(department));
+        boolean validEmailEnding = email.endsWith("levi9.com");
+        return validDepartmentInEmail && validEmailEnding;
     }
 }

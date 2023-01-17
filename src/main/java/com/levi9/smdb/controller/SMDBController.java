@@ -2,6 +2,8 @@ package com.levi9.smdb.controller;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,18 +22,13 @@ import com.levi9.smdb.service.EmployeeService;
 import com.levi9.smdb.service.SoftwareService;
 
 @Controller
+@AllArgsConstructor
 public class SMDBController {
 
     private static final String ERROR = "error";
     private final DepartmentService departmentService;
     private final SoftwareService softwareService;
     private final EmployeeService employeeService;
-
-    public SMDBController(DepartmentService departmentService, SoftwareService softwareService, EmployeeService employeeService) {
-        this.departmentService = departmentService;
-        this.softwareService = softwareService;
-        this.employeeService = employeeService;
-    }
 
     @GetMapping("/")
     public String startPage() {

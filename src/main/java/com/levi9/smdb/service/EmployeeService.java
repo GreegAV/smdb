@@ -3,7 +3,8 @@ package com.levi9.smdb.service;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.apache.commons.validator.routines.EmailValidator;
+import lombok.AllArgsConstructor;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,13 +13,11 @@ import com.levi9.smdb.entity.Employee;
 import com.levi9.smdb.repository.EmployeeRepository;
 
 @Service
+@AllArgsConstructor
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
-
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
+    private final DepartmentService departmentService;
 
     public String countEmployees() {
         return String.valueOf(employeeRepository.count());
@@ -34,10 +33,10 @@ public class EmployeeService {
 
     public boolean validateInput(String firstName, String lastName, String department, String email) {
         String word = "\\w+\\s?\\w+";
-        return Pattern.matches(word, firstName) &&
-                Pattern.matches(word, lastName) &&
-                Pattern.matches(word, department) &&
-                EmailValidator.getInstance().isValid(email);
+        boolean validNames = Pattern.matches(word, firstName) && Pattern.matches(word, lastName);
+        boolean validDepartment = departmentService.validateDepartment(department);
+        boolean validEmail = departmentService.validateEmail(department, email);
+        return validNames && validDepartment && validEmail;
     }
 
     @Transactional

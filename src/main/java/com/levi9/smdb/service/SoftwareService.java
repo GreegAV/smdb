@@ -31,8 +31,8 @@ public class SoftwareService {
     }
 
     public boolean validateInput(String softName) {
-        String word = "\\w+\\s?\\w+";
-        return Pattern.matches(word, softName);
+        String word = "(\\w+\\s?)*";
+        return !softName.isBlank() && !softName.isEmpty() && Pattern.matches(word, softName);
     }
 
     public void saveNewSoftware(Software software) {
