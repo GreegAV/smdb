@@ -44,4 +44,8 @@ public class SoftwareService {
     public List<SoftwareDTO> getUnassignedSoftware() {
         return softwareRepository.getUnassignedSoftware();
     }
+
+    public Software findSoftById(Long softId) {
+        return softwareRepository.findSoftwareById(softId);
+    }
 }

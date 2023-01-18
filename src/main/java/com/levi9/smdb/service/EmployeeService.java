@@ -1,6 +1,7 @@
 package com.levi9.smdb.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 import lombok.AllArgsConstructor;
@@ -42,5 +43,10 @@ public class EmployeeService {
     @Transactional
     public void saveNewEmployee(Employee employee) {
         employeeRepository.save(employee);
+    }
+
+    public Employee getEmployeeById(Long employeeId) {
+        Optional<Employee> employee = employeeRepository.findById(employeeId);
+        return employee.orElse(null);
     }
 }

@@ -91,8 +91,19 @@ public class SMDBController {
 
     @PostMapping("/software/assignsoftware")
     public String assignSoftwarePerform(@ModelAttribute("soft2empl") AssignSoftwareToEmployeeDTO soft2empl) {
-//        System.out.println("softId: "+soft2empl.getSoftwareId());
-//        System.out.println("emplId: "+soft2empl.getEmployeeId());
+        Software software = null;
+        if (soft2empl.getSoftwareId() != null) {
+            software = softwareService.findSoftById(soft2empl.getSoftwareId());
+        }
+        Employee employee = null;
+        if (soft2empl.getEmployeeId() != null) {
+            employee = employeeService.getEmployeeById(soft2empl.getEmployeeId());
+        }
+        System.out.println("----------------------------------------------------------");
+        System.out.println(software);
+        System.out.println("----------------------------------------------------------");
+        System.out.println(employee);
+        System.out.println("----------------------------------------------------------");
 
         return "redirect:/software/software";
     }
