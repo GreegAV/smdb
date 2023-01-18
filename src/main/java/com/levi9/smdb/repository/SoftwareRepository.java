@@ -20,4 +20,7 @@ public interface SoftwareRepository extends CrudRepository<Software, Long> {
 
     @Query(value = "select s.soft_name as softName, s.serial from software s join employees e on e.id=s.assigned_to where e.id=?1", nativeQuery = true)
     List<SoftwareDTO> getSoftwareByEmployee(@Param("id") Long id);
+
+    @Query(value = "select s.id, s.soft_name as softName, s.serial from software s where assigned_to is null", nativeQuery = true)
+    List<SoftwareDTO> getUnassignedSoftware();
 }

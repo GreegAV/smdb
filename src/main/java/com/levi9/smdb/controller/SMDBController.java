@@ -106,7 +106,7 @@ public class SMDBController {
     public String assignSoftware(Model model) {
         List<EmployeeDTO> employees = employeeService.getAllEmployees();
         model.addAttribute("employees", employees);
-        List<SoftwareDTO> softList = softwareService.getAllSoftware();
+        List<SoftwareDTO> softList = softwareService.getUnassignedSoftware();
         model.addAttribute("softList", softList);
 
         model.addAttribute("soft2empl", new AssignSoftwareToEmployeeDTO());

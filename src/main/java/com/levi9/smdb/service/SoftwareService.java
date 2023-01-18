@@ -40,4 +40,8 @@ public class SoftwareService {
     public void saveNewSoftware(Software software) {
         softwareRepository.save(software);
     }
+
+    public List<SoftwareDTO> getUnassignedSoftware() {
+        return softwareRepository.getUnassignedSoftware();
+    }
 }
