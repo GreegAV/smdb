@@ -21,7 +21,7 @@
     <tr th:each="software : ${soft}">
         <td align="center" th:text="${software.id}"></td>
         <td th:text="${software.softName}"></td>
-        <td><a th:href="|/employee/${software.assignedTo}|"><span th:text="${software.assignedName}"></span></a></td>
+        <td><a th:href="|/employee/employee/${software.assignedTo}|"><span th:text="${software.assignedName}"></span></a></td>
         <td th:text="${software.serial}"></td>
         <td th:text="${software.freeLicense}"></td>
     </tr>
@@ -31,7 +31,13 @@
 <br>
 <br>
 <p align="center">
-    <a href="/addsoftware">Add new software</a>
+    <a href="/software/addsoftware">Add new software</a>
+    &nbsp;
+    &nbsp;
+    |
+    &nbsp;
+    &nbsp;
+    <a href="/software/assignsoftware">Assign software to employee</a>
 </p>
 <br>
 <br>

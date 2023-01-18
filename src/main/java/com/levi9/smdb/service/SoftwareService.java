@@ -31,7 +31,7 @@ public class SoftwareService {
     }
 
     public boolean validateInput(String softName, String serial) {
-        String word = "([a-zA-Z0-9]\\s?)*+";
+        String word = "([a-zA-Z0-9-]\\s?)*+";
         boolean validSoftName = !softName.isBlank() && !softName.isEmpty() && Pattern.matches(word, softName);
         boolean validSerial = !serial.isBlank() && !serial.isEmpty() && Pattern.matches(word, serial);
         return validSoftName && validSerial;

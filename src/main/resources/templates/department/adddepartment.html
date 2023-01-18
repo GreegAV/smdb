@@ -2,26 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
-    <title>Add a software</title>
+    <title>Add a department</title>
 </head>
 <body>
-<h1 align="center">Add new software :</h1>
+<h1 align="center">Add new department :</h1>
 <br>
 <br>
 <table align="center" border="0" cellpadding="5" cellspacing="2">
     <thead>
     <tr>
-        <th>Software name</th>
-        <th>Software serial</th>
+        <th>Department name</th>
+        <th>Department code</th>
         <th></th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <form method="post" action="/addsoftware">
-            <td><input type="text" name="softName" id="softName"></td>
-            <td><input type="text" name="serial" id="serial"></td>
-            <td><input type="submit" value="Add software"></td>
+        <form method="post" action="/department/adddepartment">
+            <td><input type="text" name="depName" id="depName"></td>
+            <td><input type="text" name="depCode" id="depCode"></td>
+            <td><input type="submit" value="Add department"></td>
         </form>
     </tr>
     </tbody>

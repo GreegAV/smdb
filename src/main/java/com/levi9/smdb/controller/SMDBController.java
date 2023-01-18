@@ -35,7 +35,7 @@ public class SMDBController {
         return "index";
     }
 
-    @PostMapping("/addemployee")
+    @PostMapping("/employee/addemployee")
     public String addEmployeePerform(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
             @RequestParam("department") String department, @RequestParam("email") String email) {
         if (employeeService.validateInput(firstName, lastName, department, email)) {
@@ -48,15 +48,15 @@ public class SMDBController {
         } else {
             return ERROR;
         }
-        return "redirect:/employees";
+        return "redirect:/employee/employees";
     }
 
-    @GetMapping("/addemployee")
+    @GetMapping("/employee/addemployee")
     public String addEmployee() {
-        return "addemployee";
+        return "/employee/addemployee";
     }
 
-    @PostMapping("/adddepartment")
+    @PostMapping("/department/adddepartment")
     public String addDepartmentPerform(@RequestParam("depName") String depName, @RequestParam("depCode") String depCode) {
         if (departmentService.validateInput(depName, depCode)) {
             Department department = new Department();
@@ -66,15 +66,15 @@ public class SMDBController {
         } else {
             return ERROR;
         }
-        return "redirect:/departments";
+        return "redirect:/department/departments";
     }
 
-    @GetMapping("/adddepartment")
+    @GetMapping("/department/adddepartment")
     public String adddepartment() {
-        return "adddepartment";
+        return "/department/adddepartment";
     }
 
-    @PostMapping("/addsoftware")
+    @PostMapping("/software/addsoftware")
     public String addSoftwarePerform(@RequestParam("softName") String softName, @RequestParam("serial") String serial) {
         if (softwareService.validateInput(softName, serial)) {
             Software software = new Software();
@@ -84,41 +84,55 @@ public class SMDBController {
         } else {
             return ERROR;
         }
-        return "redirect:/software";
+        return "redirect:/software/software";
     }
 
-    @GetMapping("/addsoftware")
+    @PostMapping("/software/assignsoftware")
+    public String assignSoftwarePerform(@RequestParam("softName") String softName, @RequestParam("employee") Long employeeId) {
+
+
+
+        return "/software/software";
+    }
+
+    @GetMapping("/software/addsoftware")
     public String addSoftware() {
-        return "addsoftware";
+        return "/software/addsoftware";
+    }
+    @GetMapping("/software/assignsoftware")
+    public String assignSoftware(Model model) {
+        List<EmployeeDTO> employees = employeeService.getAllEmployees();
+        model.addAttribute("employees", employees);
+        return "/software/assignsoftware";
     }
 
-    @GetMapping("/employees")
+    @GetMapping("/employee/employees")
     public String employees(Model model) {
         List<EmployeeDTO> employees = employeeService.getAllEmployees();
         model.addAttribute("employees", employees);
-        return "employees";
+        return "/employee/employees";
     }
 
-    @GetMapping("/employee/{id}")
+    @GetMapping("/employee/employee/{id}")
     public String employee(@PathVariable("id") Long id, Model model) {
         EmployeeDTO employee = employeeService.getEmployeeDetailById(id);
         List<SoftwareDTO> software = softwareService.getSoftwareByEmployee(id);
         model.addAttribute("employee", employee);
         model.addAttribute("software", software);
-        return "employee";
+        return "/employee/employee";
     }
 
-    @GetMapping("/software")
+    @GetMapping("/software/software")
     public String software(Model model) {
         List<SoftwareDTO> software = softwareService.getAllSoftware();
         model.addAttribute("soft", software);
-        return "software";
+        return "/software/software";
     }
 
-    @GetMapping("/departments")
+    @GetMapping("/department/departments")
     public String departments(Model model) {
         List<DepartmentDTO> departments = departmentService.getAllDepartments();
         model.addAttribute("departments", departments);
-        return "departments";
+        return "/department/departments";
     }
 }
