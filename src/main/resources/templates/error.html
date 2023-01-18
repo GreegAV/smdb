@@ -1,11 +1,16 @@
-<html>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Error</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>Error page</title>
 </head>
 <body>
 <p align="center">
 <h1 align="center">ERROR!!!</h1>
 
+<br>
+<br>
+<div align="center" th:text="${errorMessage}"></div>
 <br>
 <br>
 <p align="center">
