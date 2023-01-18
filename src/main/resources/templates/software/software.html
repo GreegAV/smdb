@@ -18,7 +18,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="software : ${soft}">
+    <tr th:each="software : ${softList}">
         <td align="center" th:text="${software.id}"></td>
         <td th:text="${software.softName}"></td>
         <td><a th:href="|/employee/employee/${software.assignedTo}|"><span th:text="${software.assignedName}"></span></a></td>
