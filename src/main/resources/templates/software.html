@@ -14,6 +14,7 @@
         <th>Software Name</th>
         <th>Assigned Employee</th>
         <th>Serial Number</th>
+        <th>Available licenses</th>
     </tr>
     </thead>
     <tbody>
@@ -22,6 +23,7 @@
         <td th:text="${software.softName}"></td>
         <td><a th:href="|/employee/${software.assignedTo}|"><span th:text="${software.assignedName}"></span></a></td>
         <td th:text="${software.serial}"></td>
+        <td th:text="${software.freeLicense}"></td>
     </tr>
     </tbody>
 </table>

@@ -13,7 +13,8 @@ import com.levi9.smdb.entity.Software;
 @Repository
 public interface SoftwareRepository extends CrudRepository<Software, Long> {
 
-    @Query(value = "select s.id, s.soft_name as softName, concat( e.first_name,' ', e.last_name) as assignedName, s.serial, s.assigned_to as assignedTo "
+    @Query(value = "select s.id, s.soft_name as softName, concat( e.first_name,' ', e.last_name) as assignedName, s.serial, s.assigned_to as assignedTo,"
+            + "(select count(s2.id) from software s2 where s2.soft_name = s.soft_name and s2.assigned_to is null) as freeLicense  "
             + "from software s left join employees e on s.assigned_to=e.id ", nativeQuery = true)
     List<SoftwareDTO> getAllSoftware();
 

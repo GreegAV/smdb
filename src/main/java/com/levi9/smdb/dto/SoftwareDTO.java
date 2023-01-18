@@ -11,5 +11,5 @@ public interface SoftwareDTO {
     String getAssignedName();
     Long getAssignedTo();
 
-    Long getFree();
+    Long getFreeLicense();
 }

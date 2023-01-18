@@ -30,9 +30,11 @@ public class SoftwareService {
         return softwareRepository.getSoftwareByEmployee(id);
     }
 
-    public boolean validateInput(String softName) {
+    public boolean validateInput(String softName, String serial) {
         String word = "([a-zA-Z0-9]\\s?)*+";
-        return !softName.isBlank() && !softName.isEmpty() && Pattern.matches(word, softName);
+        boolean validSoftName = !softName.isBlank() && !softName.isEmpty() && Pattern.matches(word, softName);
+        boolean validSerial = !serial.isBlank() && !serial.isEmpty() && Pattern.matches(word, serial);
+        return validSoftName && validSerial;
     }
 
     public void saveNewSoftware(Software software) {

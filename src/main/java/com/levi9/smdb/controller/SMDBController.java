@@ -76,7 +76,7 @@ public class SMDBController {
 
     @PostMapping("/addsoftware")
     public String addSoftwarePerform(@RequestParam("softName") String softName, @RequestParam("serial") String serial) {
-        if (softwareService.validateInput(softName)) {
+        if (softwareService.validateInput(softName, serial)) {
             Software software = new Software();
             software.setSoftName(softName);
             software.setSerial(serial);
