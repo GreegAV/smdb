@@ -7,10 +7,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.levi9.smdb.dto.AssignSoftwareToEmployeeDTO;
 import com.levi9.smdb.dto.DepartmentDTO;
 import com.levi9.smdb.dto.EmployeeDTO;
 import com.levi9.smdb.dto.SoftwareDTO;
@@ -88,21 +90,27 @@ public class SMDBController {
     }
 
     @PostMapping("/software/assignsoftware")
-    public String assignSoftwarePerform(@RequestParam("softName") String softName, @RequestParam("employee") Long employeeId) {
+    public String assignSoftwarePerform(@ModelAttribute("soft2empl") AssignSoftwareToEmployeeDTO soft2empl) {
+//        System.out.println("softId: "+soft2empl.getSoftwareId());
+//        System.out.println("emplId: "+soft2empl.getEmployeeId());
 
-
-
-        return "/software/software";
+        return "redirect:/software/software";
     }
 
     @GetMapping("/software/addsoftware")
     public String addSoftware() {
         return "/software/addsoftware";
     }
+
     @GetMapping("/software/assignsoftware")
     public String assignSoftware(Model model) {
         List<EmployeeDTO> employees = employeeService.getAllEmployees();
         model.addAttribute("employees", employees);
+        List<SoftwareDTO> softList = softwareService.getAllSoftware();
+        model.addAttribute("softList", softList);
+
+        model.addAttribute("soft2empl", new AssignSoftwareToEmployeeDTO());
+
         return "/software/assignsoftware";
     }
 
@@ -124,8 +132,8 @@ public class SMDBController {
 
     @GetMapping("/software/software")
     public String software(Model model) {
-        List<SoftwareDTO> software = softwareService.getAllSoftware();
-        model.addAttribute("soft", software);
+        List<SoftwareDTO> softList = softwareService.getAllSoftware();
+        model.addAttribute("softList", softList);
         return "/software/software";
     }
 

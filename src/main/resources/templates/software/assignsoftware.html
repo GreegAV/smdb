@@ -11,24 +11,35 @@
 <table align="center" border="0" cellpadding="5" cellspacing="2">
     <thead>
     <tr>
-        <th>Employee</th>
         <th>Software</th>
+        <th>Employee</th>
         <th></th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <form method="post" action="/software/assignsoftware">
-            <td><input type="text" name="softName" id="softName"></td>
-            <td><div>
-                <select class="form-control" id="dropDownList">
-                    <option value="0">Select an employee</option>
-                    <option th:each="employee : ${employees}" th:value="${employee.firstName+' '+employee.lastName}" th:text="${employee.firstName}"></option>
-                </select>
-                <input type=hidden name="${employee.id}" id="employeeId" value="${employee.id}">
-            </div>
-                </td>
-            <td><input type="submit" value="Add software"></td>
+        <form method="post" action="#" th:action="@{/software/assignsoftware}" th:object="${soft2empl}">
+            <td>
+                <div>
+                    <select th:field="*{softwareId}">
+                        <option value="0">Select a software</option>
+                        <option th:each="soft : ${softList}"
+                                th:text="${soft.softName}"
+                                th:value="${soft.id}"></option>
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <select th:field="*{employeeId}">
+                        <option value="0">Select an employee</option>
+                        <option th:each="empl : ${employees}"
+                                th:text="${empl.firstName+' '+empl.lastName}"
+                                th:value="${empl.id}"></option>
+                    </select>
+                </div>
+            </td>
+            <td><input type="submit" value="Assign software"></td>
         </form>
     </tr>
     </tbody>
