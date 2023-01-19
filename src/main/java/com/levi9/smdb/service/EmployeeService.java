@@ -2,7 +2,9 @@ package com.levi9.smdb.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import lombok.AllArgsConstructor;
 
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.levi9.smdb.dto.EmployeeDTO;
 import com.levi9.smdb.entity.Employee;
+import com.levi9.smdb.entity.Software;
 import com.levi9.smdb.repository.EmployeeRepository;
 
 @Service
@@ -48,5 +51,19 @@ public class EmployeeService {
     public Employee getEmployeeById(Long employeeId) {
         Optional<Employee> employee = employeeRepository.findById(employeeId);
         return employee.orElse(null);
+    }
+
+    public boolean validateAndAssignSoftware(Software software, Employee employee) {
+        Set<Software> employeeSoftSet = employee.getSoftware();
+        Set<String> employeeSoftNames = employeeSoftSet.stream().map(Software::getSoftName).collect(Collectors.toSet());
+
+        if (employeeSoftNames.contains(software.getSoftName())) {
+            return false;
+        }
+        software.setAssignedTo(employee.getId());
+        employeeSoftSet.add(software);
+        employee.setSoftware(employeeSoftSet);
+        employeeRepository.save(employee);
+        return true;
     }
 }

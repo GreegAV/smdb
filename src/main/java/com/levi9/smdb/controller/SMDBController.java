@@ -99,12 +99,9 @@ public class SMDBController {
         if (soft2empl.getEmployeeId() != null) {
             employee = employeeService.getEmployeeById(soft2empl.getEmployeeId());
         }
-        System.out.println("----------------------------------------------------------");
-        System.out.println(software);
-        System.out.println("----------------------------------------------------------");
-        System.out.println(employee);
-        System.out.println("----------------------------------------------------------");
-
+        if (!employeeService.validateAndAssignSoftware(software, employee)) {
+            return ERROR;
+        }
         return "redirect:/software/software";
     }
 
