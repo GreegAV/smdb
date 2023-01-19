@@ -36,6 +36,28 @@ public class SMDBController {
     public String startPage() {
         return "index";
     }
+// Employee section --------------------------------------------
+
+    @GetMapping("/employee/employees")
+    public String employees(Model model) {
+        List<EmployeeDTO> employees = employeeService.getAllEmployees();
+        model.addAttribute("employees", employees);
+        return "/employee/employees";
+    }
+
+    @GetMapping("/employee/employee/{id}")
+    public String employee(@PathVariable("id") Long id, Model model) {
+        EmployeeDTO employee = employeeService.getEmployeeDetailById(id);
+        List<SoftwareDTO> software = softwareService.getSoftwareByEmployee(id);
+        model.addAttribute("employee", employee);
+        model.addAttribute("software", software);
+        return "/employee/employee";
+    }
+
+    @GetMapping("/employee/addemployee")
+    public String addEmployee() {
+        return "/employee/addemployee";
+    }
 
     @PostMapping("/employee/addemployee")
     public String addEmployeePerform(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
@@ -53,9 +75,17 @@ public class SMDBController {
         return "redirect:/employee/employees";
     }
 
-    @GetMapping("/employee/addemployee")
-    public String addEmployee() {
-        return "/employee/addemployee";
+// Department section ------------------------------------------
+    @GetMapping("/department/departments")
+    public String departments(Model model) {
+        List<DepartmentDTO> departments = departmentService.getAllDepartments();
+        model.addAttribute("departments", departments);
+        return "/department/departments";
+    }
+
+    @GetMapping("/department/adddepartment")
+    public String adddepartment() {
+        return "/department/adddepartment";
     }
 
     @PostMapping("/department/adddepartment")
@@ -71,9 +101,17 @@ public class SMDBController {
         return "redirect:/department/departments";
     }
 
-    @GetMapping("/department/adddepartment")
-    public String adddepartment() {
-        return "/department/adddepartment";
+// Software section --------------------------------------------
+    @GetMapping("/software/software")
+    public String software(Model model) {
+        List<SoftwareDTO> softList = softwareService.getAllSoftware();
+        model.addAttribute("softList", softList);
+        return "/software/software";
+    }
+
+    @GetMapping("/software/addsoftware")
+    public String addSoftware() {
+        return "/software/addsoftware";
     }
 
     @PostMapping("/software/addsoftware")
@@ -87,6 +125,18 @@ public class SMDBController {
             return ERROR;
         }
         return "redirect:/software/software";
+    }
+
+    @GetMapping("/software/assignsoftware")
+    public String assignSoftware(Model model) {
+        List<EmployeeDTO> employees = employeeService.getAllEmployees();
+        model.addAttribute("employees", employees);
+        List<SoftwareDTO> softList = softwareService.getUnassignedSoftware();
+        model.addAttribute("softList", softList);
+
+        model.addAttribute("soft2empl", new AssignSoftwareToEmployeeDTO());
+
+        return "/software/assignsoftware";
     }
 
     @PostMapping("/software/assignsoftware")
@@ -105,50 +155,4 @@ public class SMDBController {
         return "redirect:/software/software";
     }
 
-    @GetMapping("/software/addsoftware")
-    public String addSoftware() {
-        return "/software/addsoftware";
-    }
-
-    @GetMapping("/software/assignsoftware")
-    public String assignSoftware(Model model) {
-        List<EmployeeDTO> employees = employeeService.getAllEmployees();
-        model.addAttribute("employees", employees);
-        List<SoftwareDTO> softList = softwareService.getUnassignedSoftware();
-        model.addAttribute("softList", softList);
-
-        model.addAttribute("soft2empl", new AssignSoftwareToEmployeeDTO());
-
-        return "/software/assignsoftware";
-    }
-
-    @GetMapping("/employee/employees")
-    public String employees(Model model) {
-        List<EmployeeDTO> employees = employeeService.getAllEmployees();
-        model.addAttribute("employees", employees);
-        return "/employee/employees";
-    }
-
-    @GetMapping("/employee/employee/{id}")
-    public String employee(@PathVariable("id") Long id, Model model) {
-        EmployeeDTO employee = employeeService.getEmployeeDetailById(id);
-        List<SoftwareDTO> software = softwareService.getSoftwareByEmployee(id);
-        model.addAttribute("employee", employee);
-        model.addAttribute("software", software);
-        return "/employee/employee";
-    }
-
-    @GetMapping("/software/software")
-    public String software(Model model) {
-        List<SoftwareDTO> softList = softwareService.getAllSoftware();
-        model.addAttribute("softList", softList);
-        return "/software/software";
-    }
-
-    @GetMapping("/department/departments")
-    public String departments(Model model) {
-        List<DepartmentDTO> departments = departmentService.getAllDepartments();
-        model.addAttribute("departments", departments);
-        return "/department/departments";
-    }
 }
