@@ -66,4 +66,8 @@ public class EmployeeService {
         employeeRepository.save(employee);
         return true;
     }
+
+    public List<Employee> getEmployeesByDepartmentId(Long depId) {
+        return employeeRepository.getEmployeesByDepartmentId(depId);
+    }
 }

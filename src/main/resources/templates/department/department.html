@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>Department details</title>
+</head>
+<body>
+<h1 align="center">Department details</h1>
+<br>
+<br>
+<table cellspacing="2" cellpadding="5" align="center" border="2">
+    <tr>
+        <td>Id:</td><td><span th:text="${department.id}">ID</span></td>
+    </tr>
+    <tr>
+        <td>Code:</td><td><span th:text="${department.depCode}">ID</span></td>
+    </tr>
+    <tr>
+        <td>Name:</td>
+        <td><span th:text="${department.depName}">ID</span></td>
+    </tr>
+    <tr>
+        <td>Employees:</td>
+        <td>
+            <div th:each="employee : ${employees}">
+                &diams; <span th:text="${employee.firstName}+' '+${employee.lastName}"></span>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<br>
+<br>
+<p align="center">
+    <a href="/">Start page</a>
+</p>
+</body>
+</html>

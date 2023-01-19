@@ -56,4 +56,8 @@ public class DepartmentService {
         boolean validEmailEnding = email.endsWith("levi9.com");
         return validDepartmentInEmail && validEmailEnding;
     }
+
+    public Department getDepartmentDetail(Long id) {
+        return departmentRepository.getDepartmentById(id);
+    }
 }

@@ -76,11 +76,21 @@ public class SMDBController {
     }
 
 // Department section ------------------------------------------
+
     @GetMapping("/department/departments")
     public String departments(Model model) {
         List<DepartmentDTO> departments = departmentService.getAllDepartments();
         model.addAttribute("departments", departments);
         return "/department/departments";
+    }
+
+    @GetMapping("/department/department/{id}")
+    public String department(@PathVariable("id") Long id, Model model) {
+        Department department = departmentService.getDepartmentDetail(id);
+        List<Employee> employees = employeeService.getEmployeesByDepartmentId(id);
+        model.addAttribute("department", department);
+        model.addAttribute("employees", employees);
+        return "/department/department";
     }
 
     @GetMapping("/department/adddepartment")
@@ -102,6 +112,7 @@ public class SMDBController {
     }
 
 // Software section --------------------------------------------
+
     @GetMapping("/software/software")
     public String software(Model model) {
         List<SoftwareDTO> softList = softwareService.getAllSoftware();

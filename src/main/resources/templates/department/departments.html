@@ -11,17 +11,19 @@
     <thead>
     <tr>
         <th>Department ID</th>
-        <th>Department name</th>
         <th>Department code</th>
+        <th>Department name</th>
         <th>Persons work here</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="department : ${departments}">
         <td align="center" th:text="${department.id}">Department ID</td>
-        <td th:text="${department.depName}">Department name</td>
         <td th:text="${department.depCode}">Department code</td>
-        <td th:text="${department.working}">Work here</td>
+        <td th:text="${department.depName}">Department name</td>
+        <td th:text="${department.working}" align="center">Work here</td>
+        <td><a th:href="|/department/department/${department.id}|">Details</a></td>
     </tr>
     </tbody>
 </table>

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.levi9.smdb.dto.DepartmentDTO;
@@ -19,4 +20,7 @@ public interface DepartmentRepository extends CrudRepository<Department, Long> {
 
     @Query(value = "select dep_code from departments", nativeQuery = true)
     Set<String> getDepartmentCodes();
+
+    @Query(value = "select d.id, d.dep_name as depName, d.dep_code as depCode from departments d where d.id= :depId", nativeQuery = true)
+    Department getDepartmentById(@Param("depId") Long depId);
 }
