@@ -28,8 +28,4 @@ public class Software {
     @Column(name = "assigned_to")
     private Long assignedTo;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
-
 }

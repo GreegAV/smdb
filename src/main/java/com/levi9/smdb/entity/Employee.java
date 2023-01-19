@@ -1,6 +1,5 @@
 package com.levi9.smdb.entity;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.constraints.Email;
@@ -13,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -47,7 +47,8 @@ public class Employee {
     @NotEmpty(message = "Employee should have email.")
     private String email;
 
-    @OneToMany(mappedBy = "employee", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    private Set<Software> software = new HashSet<>();
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "assigned_to")
+    private Set<Software> software;
 
 }
