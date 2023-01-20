@@ -21,7 +21,6 @@ import com.levi9.smdb.repository.EmployeeRepository;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
-    private final DepartmentService departmentService;
 
     public String countEmployees() {
         return String.valueOf(employeeRepository.count());
@@ -35,12 +34,9 @@ public class EmployeeService {
         return employeeRepository.getEmployeeById(id);
     }
 
-    public boolean validateInput(String firstName, String lastName, String department, String email) {
+    public boolean validateInput(String firstName, String lastName) {
         String word = "([a-zA-Z]\\s?)*+";
-        boolean validNames = Pattern.matches(word, firstName) && Pattern.matches(word, lastName);
-        boolean validDepartment = departmentService.validateDepartment(department);
-        boolean validEmail = departmentService.validateEmail(department, email);
-        return validNames && validDepartment && validEmail;
+        return Pattern.matches(word, firstName) && Pattern.matches(word, lastName);
     }
 
     @Transactional
