@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>Assign a software</title>
+</head>
+<body>
+<h1 align="center">Assign software to the employee :</h1>
+<br>
+<br>
+<table align="center" border="0" cellpadding="5" cellspacing="2">
+    <thead>
+    <tr>
+        <th>Employee</th>
+        <th>Software</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <form method="post" action="#" th:action="@{/software/assignsoftware}" th:object="${soft2empl}">
+            <td>
+                <div>
+                    <select th:field="*{employeeId}">
+                        <option th:each="empl : ${employee}"
+                                th:text="${empl.firstName+' '+empl.lastName}"
+                                th:value="${empl.id}"></option>
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <select th:field="*{softwareId}">
+                        <option value="0">Select a software</option>
+                        <option th:each="soft : ${softList}"
+                                th:text="${soft.softName}"
+                                th:value="${soft.id}"></option>
+                    </select>
+                </div>
+            </td>
+            <td><input type="submit" value="Assign software"></td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+<br>
+
+<br>
+<p align="center">
+    <a href="/">Start page</a>
+</p>
+</body>
+</html>

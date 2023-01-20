@@ -148,6 +148,17 @@ public class SMDBController {
 
         return "/software/assignsoftware";
     }
+    @GetMapping("/software/assignsoftware/{id}")
+    public String assignSoftwareForEmployee(@PathVariable("id") Long id, Model model) {
+        Employee employee = employeeService.getEmployeeById(id);
+        model.addAttribute("employee", employee);
+        List<SoftwareDTO> softList = softwareService.getUnassignedSoftware();
+        model.addAttribute("softList", softList);
+
+        model.addAttribute("soft2empl", new AssignSoftwareToEmployeeDTO());
+
+        return "/software/assignsoftwareemployee";
+    }
 
     @PostMapping("/software/assignsoftware")
     public String assignSoftwarePerform(@ModelAttribute("soft2empl") AssignSoftwareToEmployeeDTO soft2empl) {
