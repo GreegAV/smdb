@@ -69,8 +69,29 @@ public class EmployeeService {
     }
 
     public boolean validateAndAssignDepartment(Department newDepartment, Employee employee) {
+        // TODO: refactor and fix this !!!!!!!!!!!!!!!
         if (newDepartment != null && employee != null) {
             employee.setDepartmentId(newDepartment.getId());
+            StringBuilder email = new StringBuilder()
+                    .append(employee.getFirstName())
+                    .append(".")
+                    .append(employee.getLastName())
+                    .append("@")
+                    .append(newDepartment.getDepCode())
+                    .append(".levi9.com");
+            Set<String> emails = employeeRepository.findAllEmails();
+            if (emails.contains(email.toString().toLowerCase())) {
+                email = new StringBuilder()
+                        .append(employee.getFirstName())
+                        .append(".")
+                        .append(employee.getLastName())
+                        .append(".")
+                        .append(newDepartment.getDepCode())
+                        .append("@")
+                        .append(newDepartment.getDepCode())
+                        .append(".levi9.com");
+            }
+            employee.setEmail(email.toString().toLowerCase());
             employeeRepository.save(employee);
             return true;
         }
