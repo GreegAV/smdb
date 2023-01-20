@@ -57,7 +57,7 @@ public class DepartmentService {
         return validDepartmentInEmail && validEmailEnding;
     }
 
-    public Department getDepartmentDetail(Long id) {
-        return departmentRepository.getDepartmentById(id);
+    public Department getDepartmentById(Long departmentId) {
+        return departmentRepository.getDepartmentById(departmentId);
     }
 }

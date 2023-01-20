@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.levi9.smdb.dto.EmployeeDTO;
+import com.levi9.smdb.entity.Department;
 import com.levi9.smdb.entity.Employee;
 import com.levi9.smdb.entity.Software;
 import com.levi9.smdb.repository.EmployeeRepository;
@@ -65,5 +66,14 @@ public class EmployeeService {
 
     public List<Employee> getEmployeesByDepartmentId(Long depId) {
         return employeeRepository.getEmployeesByDepartmentId(depId);
+    }
+
+    public boolean validateAndAssignDepartment(Department newDepartment, Employee employee) {
+        if (newDepartment != null && employee != null) {
+            employee.setDepartmentId(newDepartment.getId());
+            employeeRepository.save(employee);
+            return true;
+        }
+        return false;
     }
 }

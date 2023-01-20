@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.levi9.smdb.dto.AssignDepartmentToEmployeeDTO;
 import com.levi9.smdb.dto.AssignSoftwareToEmployeeDTO;
 import com.levi9.smdb.dto.DepartmentDTO;
 import com.levi9.smdb.dto.EmployeeDTO;
@@ -85,7 +86,7 @@ public class SMDBController {
 
     @GetMapping("/department/department/{id}")
     public String department(@PathVariable("id") Long id, Model model) {
-        Department department = departmentService.getDepartmentDetail(id);
+        Department department = departmentService.getDepartmentById(id);
         List<Employee> employees = employeeService.getEmployeesByDepartmentId(id);
         model.addAttribute("department", department);
         model.addAttribute("employees", employees);
@@ -108,6 +109,34 @@ public class SMDBController {
             return ERROR;
         }
         return "redirect:/department/departments";
+    }
+
+    @GetMapping("/department/assigndepartment/{id}")
+    public String assignDepartmentForEmployee(@PathVariable("id") Long id, Model model) {
+        Employee employee = employeeService.getEmployeeById(id);
+        model.addAttribute("employee", employee);
+        List<DepartmentDTO> deptList = departmentService.getAllDepartments();
+        model.addAttribute("deptList", deptList);
+
+        model.addAttribute("dept2empl", new AssignDepartmentToEmployeeDTO());
+
+        return "/department/assigndepartmentemployee";
+    }
+
+    @PostMapping("/department/assigndepartment")
+    public String assignDepartmnetPerform(@ModelAttribute("dept2empl") AssignDepartmentToEmployeeDTO dept2empl) {
+        Department department = null;
+        if (dept2empl.getDepartmentId() != null) {
+            department = departmentService.getDepartmentById(dept2empl.getDepartmentId());
+        }
+        Employee employee = null;
+        if (dept2empl.getEmployeeId() != null) {
+            employee = employeeService.getEmployeeById(dept2empl.getEmployeeId());
+        }
+        if (!employeeService.validateAndAssignDepartment(department, employee)) {
+            return ERROR;
+        }
+        return "redirect:/employee/employees";
     }
 
 // Software section --------------------------------------------
@@ -148,6 +177,7 @@ public class SMDBController {
 
         return "/software/assignsoftware";
     }
+
     @GetMapping("/software/assignsoftware/{id}")
     public String assignSoftwareForEmployee(@PathVariable("id") Long id, Model model) {
         Employee employee = employeeService.getEmployeeById(id);

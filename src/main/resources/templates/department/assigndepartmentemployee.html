@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>Assign a department</title>
+</head>
+<body>
+<h1 align="center">Assign department to the employee :</h1>
+<br>
+<br>
+<table align="center" border="0" cellpadding="5" cellspacing="2">
+    <thead>
+    <tr>
+        <th>Employee</th>
+        <th>Department</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <form method="post" action="#" th:action="@{/department/assigndepartment}" th:object="${dept2empl}">
+            <td>
+                <div>
+                    <select th:field="*{employeeId}">
+                        <option th:each="empl : ${employee}"
+                                th:text="${empl.firstName+' '+empl.lastName}"
+                                th:value="${empl.id}"></option>
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <select th:field="*{departmentId}">
+                        <option value="0">Select a department</option>
+                        <option th:each="dept : ${deptList}"
+                                th:text="${dept.depName}"
+                                th:value="${dept.id}"></option>
+                    </select>
+                </div>
+            </td>
+            <td><input type="submit" value="Assign department"></td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+<br>
+
+<br>
+<p align="center">
+    <a href="/">Start page</a>
+</p>
+</body>
+</html>
