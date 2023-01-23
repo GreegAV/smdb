@@ -1,7 +1,6 @@
 package com.levi9.smdb.repository;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -26,9 +25,7 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
             + "from employees e where e.department_id= :depId", nativeQuery = true)
     List<Employee> getEmployeesByDepartmentId(@Param("depId") Long depId);
 
-    @Query(value = "select * from employees e where e.email like ':?1'", nativeQuery = true)
-    Employee findEmployeeByEmail(@Param("email") String email);
+    @Query(value = "select exists(select 1 from employees e where e.email = :mail)", nativeQuery = true)
+    boolean emailExists(@Param("mail") String mail);
 
-    @Query(value = "select e.email from employees e", nativeQuery = true)
-    Set<String> findAllEmails();
 }

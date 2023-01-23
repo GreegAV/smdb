@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import lombok.AllArgsConstructor;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +38,7 @@ public class EmployeeService {
 
     public boolean validateInput(String firstName, String lastName) {
         String word = "([a-zA-Z]\\s?)*+";
-        return Pattern.matches(word, firstName) && Pattern.matches(word, lastName);
+        return !firstName.isEmpty() && !lastName.isEmpty() && Pattern.matches(word, firstName) && Pattern.matches(word, lastName);
     }
 
     @Transactional
@@ -69,32 +70,30 @@ public class EmployeeService {
     }
 
     public boolean validateAndAssignDepartment(Department newDepartment, Employee employee) {
-        // TODO: refactor and fix this !!!!!!!!!!!!!!!
         if (newDepartment != null && employee != null) {
             employee.setDepartmentId(newDepartment.getId());
-            StringBuilder email = new StringBuilder()
-                    .append(employee.getFirstName())
-                    .append(".")
-                    .append(employee.getLastName())
-                    .append("@")
-                    .append(newDepartment.getDepCode())
-                    .append(".levi9.com");
-            Set<String> emails = employeeRepository.findAllEmails();
-            if (emails.contains(email.toString().toLowerCase())) {
-                email = new StringBuilder()
-                        .append(employee.getFirstName())
-                        .append(".")
-                        .append(employee.getLastName())
-                        .append(".")
-                        .append(newDepartment.getDepCode())
-                        .append("@")
-                        .append(newDepartment.getDepCode())
-                        .append(".levi9.com");
-            }
-            employee.setEmail(email.toString().toLowerCase());
+            employee.setEmail(getNewEmail(newDepartment, employee));
             employeeRepository.save(employee);
             return true;
         }
         return false;
+    }
+
+    @NotNull
+    private String getNewEmail(Department dept, Employee emp) {
+        String email;
+        int attempt = 1;
+        String email1part = (emp.getFirstName() + (emp.getLastName().isEmpty() ? "" : "." + emp.getLastName())).toLowerCase();
+        String emailLastPart = ("@" + dept.getDepCode() + ".levi9.com").toLowerCase();
+        email = email1part + emailLastPart;
+        while (attempt > 0) {
+            if (Boolean.FALSE.equals(employeeRepository.emailExists(email))) {
+                return email;
+            }
+            email = email1part + "." + dept.getDepCode().toLowerCase() + (attempt > 1 ? ("." + attempt) : "") + emailLastPart;
+            attempt++;
+        }
+
+        return email;
     }
 }
