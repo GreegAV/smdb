@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.levi9.smdb.dto.AssignSoftwareToEmployeeDTO;
@@ -22,25 +23,26 @@ import com.levi9.smdb.service.SoftwareService;
 
 @Controller
 @AllArgsConstructor
+@RequestMapping("/software")
 public class SoftwareController {
 
     private static final String ERROR = "error";
     private final SoftwareService softwareService;
     private final EmployeeService employeeService;
 
-    @GetMapping("/software/software")
+    @GetMapping("/software")
     public String software(Model model) {
         List<SoftwareDTO> softList = softwareService.getAllSoftware();
         model.addAttribute("softList", softList);
         return "/software/software";
     }
 
-    @GetMapping("/software/addsoftware")
+    @GetMapping("/addsoftware")
     public String addSoftware() {
         return "/software/addsoftware";
     }
 
-    @PostMapping("/software/addsoftware")
+    @PostMapping("/addsoftware")
     public String addSoftwarePerform(@RequestParam("softName") String softName, @RequestParam("serial") String serial) {
         if (softwareService.validateInput(softName, serial)) {
             Software software = new Software();
@@ -53,7 +55,7 @@ public class SoftwareController {
         return "redirect:/software/software";
     }
 
-    @GetMapping("/software/assignsoftware")
+    @GetMapping("/assignsoftware")
     public String assignSoftware(Model model) {
         List<EmployeeDTO> employees = employeeService.getAllEmployees();
         model.addAttribute("employees", employees);
@@ -65,7 +67,7 @@ public class SoftwareController {
         return "/software/assignsoftware";
     }
 
-    @GetMapping("/software/assignsoftware/{id}")
+    @GetMapping("/assignsoftware/{id}")
     public String assignSoftwareForEmployee(@PathVariable("id") Long id, Model model) {
         Employee employee = employeeService.getEmployeeById(id);
         model.addAttribute("employee", employee);
@@ -77,7 +79,7 @@ public class SoftwareController {
         return "/software/assignsoftwareemployee";
     }
 
-    @PostMapping("/software/assignsoftware")
+    @PostMapping("/assignsoftware")
     public String assignSoftwarePerform(@ModelAttribute("soft2empl") AssignSoftwareToEmployeeDTO soft2empl) {
         Software software = null;
         if (soft2empl.getSoftwareId() != null) {

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.levi9.smdb.dto.AssignDepartmentToEmployeeDTO;
@@ -21,20 +22,21 @@ import com.levi9.smdb.service.EmployeeService;
 
 @Controller
 @AllArgsConstructor
+@RequestMapping("/department")
 public class DepartmentController {
 
     private static final String ERROR = "error";
     private final DepartmentService departmentService;
     private final EmployeeService employeeService;
 
-    @GetMapping("/department/departments")
+    @GetMapping("/departments")
     public String departments(Model model) {
         List<DepartmentDTO> departments = departmentService.getAllDepartments();
         model.addAttribute("departments", departments);
         return "/department/departments";
     }
 
-    @GetMapping("/department/department/{id}")
+    @GetMapping("/{id}")
     public String department(@PathVariable("id") Long id, Model model) {
         Department department = departmentService.getDepartmentById(id);
         List<Employee> employees = employeeService.getEmployeesByDepartmentId(id);
@@ -43,12 +45,12 @@ public class DepartmentController {
         return "/department/department";
     }
 
-    @GetMapping("/department/adddepartment")
+    @GetMapping("/adddepartment")
     public String adddepartment() {
         return "/department/adddepartment";
     }
 
-    @PostMapping("/department/adddepartment")
+    @PostMapping("/adddepartment")
     public String addDepartmentPerform(@RequestParam("depName") String depName, @RequestParam("depCode") String depCode) {
         if (departmentService.validateInput(depName, depCode)) {
             Department department = new Department();
@@ -61,7 +63,7 @@ public class DepartmentController {
         return "redirect:/department/departments";
     }
 
-    @GetMapping("/department/assigndepartment/{id}")
+    @GetMapping("/assigndepartment/{id}")
     public String assignDepartmentForEmployee(@PathVariable("id") Long id, Model model) {
         Employee employee = employeeService.getEmployeeById(id);
         model.addAttribute("employee", employee);
@@ -73,7 +75,7 @@ public class DepartmentController {
         return "/department/assigndepartmentemployee";
     }
 
-    @PostMapping("/department/assigndepartment")
+    @PostMapping("/assigndepartment")
     public String assignDepartmnetPerform(@ModelAttribute("dept2empl") AssignDepartmentToEmployeeDTO dept2empl) {
         Department department = null;
         if (dept2empl.getDepartmentId() != null) {

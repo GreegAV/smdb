@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.levi9.smdb.dto.EmployeeDTO;
@@ -19,20 +20,21 @@ import com.levi9.smdb.service.SoftwareService;
 
 @Controller
 @AllArgsConstructor
+@RequestMapping("/employee")
 public class EmployeeController {
 
     private static final String ERROR = "error";
     private final SoftwareService softwareService;
     private final EmployeeService employeeService;
 
-    @GetMapping("/employee/employees")
+    @GetMapping("/employees")
     public String employees(Model model) {
         List<EmployeeDTO> employees = employeeService.getAllEmployees();
         model.addAttribute("employees", employees);
         return "/employee/employees";
     }
 
-    @GetMapping("/employee/employee/{id}")
+    @GetMapping("/{id}")
     public String employee(@PathVariable("id") Long id, Model model) {
         EmployeeDTO employee = employeeService.getEmployeeDetailById(id);
         List<SoftwareDTO> software = softwareService.getSoftwareByEmployee(id);
@@ -41,12 +43,13 @@ public class EmployeeController {
         return "/employee/employee";
     }
 
-    @GetMapping("/employee/addemployee")
-    public String addEmployee() {
+    @GetMapping("/addemployee")
+    public String addEmployee(Model model) {
+        model.addAttribute("employee", new Employee());
         return "/employee/addemployee";
     }
 
-    @PostMapping("/employee/addemployee")
+    @PostMapping("/addemployee")
     public String addEmployeePerform(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         if (employeeService.validateInput(firstName, lastName)) {
             Employee employee = new Employee();
