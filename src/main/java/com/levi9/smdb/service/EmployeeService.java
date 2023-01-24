@@ -99,4 +99,12 @@ public class EmployeeService {
 
         return email;
     }
+
+    public boolean updateEmployee(Long id, Employee employee) {
+        Employee updateEmployee = getEmployeeById(id);
+        updateEmployee.setFirstName(employee.getFirstName());
+        updateEmployee.setLastName(employee.getLastName());
+        employeeRepository.save(updateEmployee);
+        return true;
+    }
 }

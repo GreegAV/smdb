@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +56,20 @@ public class EmployeeController {
         } else {
             return ERROR;
         }
+    }
+    @GetMapping("/{id}/edit")
+    public String editEmployee(@PathVariable("id") Long id, Model model) {
+        Employee employee = employeeService.getEmployeeById(id);
+        model.addAttribute("employee", employee);
+        return "/employee/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String editEmployeePerform(@ModelAttribute("employee") Employee employee, @PathVariable("id") Long id) {
+        if (employeeService.updateEmployee(id, employee)) {
+            return "redirect:/employee/employees";
+        }
+        return ERROR;
     }
 
 }

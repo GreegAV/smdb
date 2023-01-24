@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>Edit the employee</title>
+</head>
+<body>
+<h1 align="center">Add an employee :</h1>
+<br>
+<br>
+<table align="center" border="0" cellpadding="5" cellspacing="2">
+    <thead>
+    <tr>
+        <th><label for="firstName">First Name</label></th>
+        <th><label for="lastName">Last Name</label></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <form th:method="patch" th:action="@{|/employee/${employee.id}|}" th:object="${employee}">
+            <td><input type="text" th:field="*{firstName}" id="firstName"></td>
+            <td><input type="text" th:field="*{lastName}" id="lastName"></td>
+            <td><input type="submit" value="Update employee"></td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<p align="center">
+    <a href="/">Start page</a>
+</p>
+</body>
+</html>
