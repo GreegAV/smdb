@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -95,4 +96,18 @@ public class SoftwareController {
         return "redirect:/software/software";
     }
 
+    @GetMapping("/{id}/edit")
+    public String editSoftware(@PathVariable("id") Long id, Model model) {
+        Software software = softwareService.getSoftwareById(id);
+        model.addAttribute("software", software);
+        return "/software/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String editSoftwarePerform(@ModelAttribute("software") Software software, @PathVariable("id") Long id) {
+        if (softwareService.updateSoftware(id, software)) {
+            return "redirect:/software/software";
+        }
+        return ERROR;
+    }
 }

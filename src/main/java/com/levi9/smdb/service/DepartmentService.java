@@ -51,9 +51,9 @@ public class DepartmentService {
         return departmentRepository.getDepartmentById(departmentId);
     }
 
-    public boolean updateDepartment(Long id, Department department) {
+    public boolean updateDepartment(Long deptId, Department department) {
         if (validateInput(department.getDepName(), department.getDepCode())) {
-            Department updateDepartment = getDepartmentById(id);
+            Department updateDepartment = departmentRepository.getDepartmentById(deptId);
             updateDepartment.setDepCode(department.getDepCode());
             updateDepartment.setDepName(department.getDepName());
             departmentRepository.save(updateDepartment);

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>Edit the software</title>
+</head>
+<body>
+<h1 align="center">Edit the software :</h1>
+<br>
+<br>
+<table align="center" border="0" cellpadding="5" cellspacing="2">
+    <thead>
+    <tr>
+        <th><label for="softName">Software Name</label></th>
+        <th><label for="serial">Software Serial</label></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <form th:method="patch" th:action="@{|/software/${software.id}|}" th:object="${software}">
+            <td><input type="text" th:field="*{softName}" id="softName"></td>
+            <td><input type="text" th:field="*{serial}" id="serial"></td>
+            <td><input type="submit" value="Update software"></td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<p align="center">
+    <a href="/">Start page</a>
+</p>
+</body>
+</html>

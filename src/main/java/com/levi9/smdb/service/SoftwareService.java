@@ -44,4 +44,19 @@ public class SoftwareService {
     public Software findSoftById(Long softId) {
         return softwareRepository.findSoftwareById(softId);
     }
+
+    public Software getSoftwareById(Long id) {
+        return softwareRepository.findSoftwareById(id);
+    }
+
+    public boolean updateSoftware(Long softId, Software software) {
+        if (validateInput(software.getSoftName(), software.getSerial())) {
+            Software updateSoftware = softwareRepository.findSoftwareById(softId);
+            updateSoftware.setSoftName(software.getSoftName());
+            updateSoftware.setSerial(software.getSerial());
+            softwareRepository.save(updateSoftware);
+            return true;
+        }
+        return false;
+    }
 }
