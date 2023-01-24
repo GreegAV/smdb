@@ -18,10 +18,6 @@ public class SoftwareService {
         this.softwareRepository = softwareRepository;
     }
 
-    public String countSoftwares() {
-        return String.valueOf(softwareRepository.count());
-    }
-
     public List<SoftwareDTO> getAllSoftware() {
         return softwareRepository.getAllSoftware();
     }

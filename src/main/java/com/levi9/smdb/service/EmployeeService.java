@@ -23,10 +23,6 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-    public String countEmployees() {
-        return String.valueOf(employeeRepository.count());
-    }
-
     public List<EmployeeDTO> getAllEmployees() {
         return employeeRepository.getAllEmployees();
     }

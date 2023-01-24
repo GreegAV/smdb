@@ -19,10 +19,6 @@ public class DepartmentService {
         this.departmentRepository = departmentRepository;
     }
 
-    public String countDepartments() {
-        return String.valueOf(departmentRepository.count());
-    }
-
     public List<DepartmentDTO> getAllDepartments() {
         return departmentRepository.getAllDepartments();
     }
