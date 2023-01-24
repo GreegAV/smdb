@@ -7,10 +7,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.levi9.smdb.dto.EmployeeDTO;
 import com.levi9.smdb.dto.SoftwareDTO;
@@ -44,24 +44,17 @@ public class EmployeeController {
     }
 
     @GetMapping("/addemployee")
-    public String addEmployee(Model model) {
-        model.addAttribute("employee", new Employee());
+    public String addEmployee(@ModelAttribute("employee") Employee employee) {
         return "/employee/addemployee";
     }
 
     @PostMapping("/addemployee")
-    public String addEmployeePerform(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
-        if (employeeService.validateInput(firstName, lastName)) {
-            Employee employee = new Employee();
-            employee.setFirstName(firstName);
-            employee.setLastName(lastName);
-            employee.setDepartmentId(null);
-            employee.setEmail(null);
-            employeeService.saveNewEmployee(employee);
+    public String addEmployeePerform(@ModelAttribute("employee") Employee employee) {
+        if (employeeService.saveNewEmployee(employee)) {
+            return "redirect:/employee/employees";
         } else {
             return ERROR;
         }
-        return "redirect:/employee/employees";
     }
 
 }

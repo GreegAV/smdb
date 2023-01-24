@@ -27,11 +27,6 @@ public class DepartmentService {
         return departmentRepository.getAllDepartments();
     }
 
-    public Long getDepIdByDepCode(String depCode) {
-        return departmentRepository.getAllDepartments().stream().filter(dept -> dept.getDepCode().equalsIgnoreCase(depCode)).findFirst()
-                .map(DepartmentDTO::getId).orElse(null);
-    }
-
     public boolean validateInput(String depName, String depCode) {
         return Pattern.matches("\\w+\\s?\\w+", depName) && Pattern.matches("\\w+", depCode);
     }
@@ -50,7 +45,7 @@ public class DepartmentService {
 
     public boolean validateEmail(String department, String email) {
         Set<String> depCodes = departmentRepository.getDepartmentCodes();
-        String depCodeFromEmail = email.substring(email.indexOf("@") + 1, email.indexOf("."));
+        String depCodeFromEmail = email.substring(email.indexOf("@") + 1, email.indexOf(".levi9.com"));
         boolean validDepartmentInEmail =
                 depCodes.stream().anyMatch(depCode -> depCode.equalsIgnoreCase(depCodeFromEmail) && depCode.equalsIgnoreCase(department));
         boolean validEmailEnding = email.endsWith("levi9.com");

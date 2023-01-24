@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.levi9.smdb.dto.EmployeeDTO;
 import com.levi9.smdb.entity.Department;
@@ -41,9 +40,17 @@ public class EmployeeService {
         return !firstName.isEmpty() && !lastName.isEmpty() && Pattern.matches(word, firstName) && Pattern.matches(word, lastName);
     }
 
-    @Transactional
-    public void saveNewEmployee(Employee employee) {
-        employeeRepository.save(employee);
+    public boolean saveNewEmployee(Employee employee) {
+        Employee newEmployee = new Employee();
+        if (validateInput(employee.getFirstName(), employee.getLastName())) {
+            newEmployee.setFirstName(employee.getFirstName());
+            newEmployee.setLastName(employee.getLastName());
+            newEmployee.setDepartmentId(null);
+            newEmployee.setEmail(null);
+            employeeRepository.save(newEmployee);
+            return true;
+        }
+        return false;
     }
 
     public Employee getEmployeeById(Long employeeId) {
