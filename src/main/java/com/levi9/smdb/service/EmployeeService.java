@@ -101,10 +101,13 @@ public class EmployeeService {
     }
 
     public boolean updateEmployee(Long id, Employee employee) {
-        Employee updateEmployee = getEmployeeById(id);
-        updateEmployee.setFirstName(employee.getFirstName());
-        updateEmployee.setLastName(employee.getLastName());
-        employeeRepository.save(updateEmployee);
-        return true;
+        if (validateInput(employee.getFirstName(), employee.getLastName())) {
+            Employee updateEmployee = getEmployeeById(id);
+            updateEmployee.setFirstName(employee.getFirstName());
+            updateEmployee.setLastName(employee.getLastName());
+            employeeRepository.save(updateEmployee);
+            return true;
+        }
+        return false;
     }
 }

@@ -24,7 +24,11 @@ public class DepartmentService {
     }
 
     public boolean validateInput(String depName, String depCode) {
-        return Pattern.matches("\\w+\\s?\\w+", depName) && Pattern.matches("\\w+", depCode);
+        String name = "([a-zA-Z]\\s?)*+";
+        String code = "^[A-Za-z]*$";
+        boolean validName = !depName.isEmpty() && !depName.isBlank() && Pattern.matches(name, depName);
+        boolean validCode = !depCode.isEmpty() && !depCode.isBlank() && Pattern.matches(code, depCode);
+        return validName && validCode;
     }
 
     public void saveNewDepartment(Department department) {
@@ -32,11 +36,6 @@ public class DepartmentService {
         depCode = depCode.substring(0, 1).toUpperCase() + depCode.substring(1);
         department.setDepCode(depCode);
         departmentRepository.save(department);
-    }
-
-    public boolean validateDepartment(String department) {
-        Set<String> depCodes = departmentRepository.getDepartmentCodes();
-        return depCodes.stream().anyMatch(depCode -> depCode.equalsIgnoreCase(department.trim()));
     }
 
     public boolean validateEmail(String department, String email) {
@@ -50,5 +49,16 @@ public class DepartmentService {
 
     public Department getDepartmentById(Long departmentId) {
         return departmentRepository.getDepartmentById(departmentId);
+    }
+
+    public boolean updateDepartment(Long id, Department department) {
+        if (validateInput(department.getDepName(), department.getDepCode())) {
+            Department updateDepartment = getDepartmentById(id);
+            updateDepartment.setDepCode(department.getDepCode());
+            updateDepartment.setDepName(department.getDepName());
+            departmentRepository.save(updateDepartment);
+            return true;
+        }
+        return false;
     }
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>Edit the department</title>
+</head>
+<body>
+<h1 align="center">Edit the department :</h1>
+<br>
+<br>
+<table align="center" border="0" cellpadding="5" cellspacing="2">
+    <thead>
+    <tr>
+        <th><label for="depCode">Department Code</label></th>
+        <th><label for="depName">Department Name</label></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <form th:method="patch" th:action="@{|/department/${department.id}|}" th:object="${department}">
+            <td><input type="text" th:field="*{depCode}" id="depCode"></td>
+            <td><input type="text" th:field="*{depName}" id="depName"></td>
+            <td><input type="submit" value="Update department"></td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<p align="center">
+    <a href="/">Start page</a>
+</p>
+</body>
+</html>
