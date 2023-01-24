@@ -57,6 +57,7 @@ public class EmployeeController {
             return ERROR;
         }
     }
+
     @GetMapping("/{id}/edit")
     public String editEmployee(@PathVariable("id") Long id, Model model) {
         Employee employee = employeeService.getEmployeeById(id);
@@ -72,4 +73,9 @@ public class EmployeeController {
         return ERROR;
     }
 
+    @GetMapping("/{id}/dismiss")
+    public String dismissEmployee(@PathVariable("id") Long id) {
+        employeeService.dismissEmployee(id);
+        return "redirect:/employee/employees";
+    }
 }

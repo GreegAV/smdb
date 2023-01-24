@@ -110,4 +110,13 @@ public class EmployeeService {
         }
         return false;
     }
+
+    public void dismissEmployee(Long id) {
+        Employee employee = getEmployeeById(id);
+        if (employee != null) {
+            employee.setDepartmentId(0L);
+            employee.setEmail(null);
+            employeeRepository.save(employee);
+        }
+    }
 }

@@ -24,6 +24,10 @@ assigned_to int);
 
 ALTER TABLE software ADD CONSTRAINT fk_software_employees FOREIGN KEY (assigned_to) REFERENCES employees (id);
 
+insert into departments (id,dep_code, dep_name)
+values
+(0,'', '');
+
 insert into departments (dep_code, dep_name)
 values
 ('IT', 'Information Technology'),

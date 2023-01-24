@@ -26,7 +26,13 @@
         <td th:text="${employee.lastName}">Last Name</td>
         <td th:text="${employee.department}">Department</td>
         <td th:text="${employee.email}">Email</td>
-        <td><a th:href="|/employee/${employee.id}|">Details</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a th:href="|/employee/${employee.id}/edit|">Edit</a></td>
+        <td>
+            <a th:href="|/employee/${employee.id}|">Details</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a th:href="|/employee/${employee.id}/edit|">Edit</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a th:href="|/employee/${employee.id}/dismiss|">Dismiss</a>
+        </td>
     </tr>
     </tbody>
 </table>
