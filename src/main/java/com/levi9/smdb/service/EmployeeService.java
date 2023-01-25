@@ -32,7 +32,7 @@ public class EmployeeService {
     }
 
     public boolean validateInput(String firstName, String lastName) {
-        String word = "([a-zA-Z]\\s?)*+";
+        String word = "([a-zA-Z-]\\s?)*+";
         return !firstName.isEmpty() && !lastName.isEmpty() && Pattern.matches(word, firstName) && Pattern.matches(word, lastName);
     }
 
@@ -85,19 +85,13 @@ public class EmployeeService {
     @NotNull
     private String getNewEmail(Department dept, Employee emp) {
         String email;
-        int attempt = 1;
         String email1part = (emp.getFirstName() + (emp.getLastName().isEmpty() ? "" : "." + emp.getLastName())).toLowerCase();
         String emailLastPart = ("@" + dept.getDepCode() + ".levi9.com").toLowerCase();
         email = email1part + emailLastPart;
-        while (attempt > 0) {
-            if (Boolean.FALSE.equals(employeeRepository.emailExists(email))) {
-                return email;
-            }
-            email = email1part + "." + dept.getDepCode().toLowerCase() + (attempt > 1 ? ("." + attempt) : "") + emailLastPart;
-            attempt++;
+        if (Boolean.FALSE.equals(employeeRepository.emailExists(email))) {
+            return email;
         }
-
-        return email;
+        return email1part + "." + emp.getId() + emailLastPart;
     }
 
     public boolean updateEmployee(Long id, Employee employee) {
