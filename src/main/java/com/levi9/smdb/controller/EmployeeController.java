@@ -25,6 +25,7 @@ import com.levi9.smdb.service.SoftwareService;
 public class EmployeeController {
 
     private static final String ERROR = "error";
+    private static final String EMPLOYEES = "redirect:/employee/employees";
     private final SoftwareService softwareService;
     private final EmployeeService employeeService;
 
@@ -52,7 +53,7 @@ public class EmployeeController {
     @PostMapping("/addemployee")
     public String addEmployeePerform(@ModelAttribute("employee") Employee employee) {
         if (employeeService.saveNewEmployee(employee)) {
-            return "redirect:/employee/employees";
+            return EMPLOYEES;
         } else {
             return ERROR;
         }
@@ -68,7 +69,7 @@ public class EmployeeController {
     @PatchMapping("/{id}")
     public String editEmployeePerform(@ModelAttribute("employee") Employee employee, @PathVariable("id") Long id) {
         if (employeeService.updateEmployee(id, employee)) {
-            return "redirect:/employee/employees";
+            return EMPLOYEES;
         }
         return ERROR;
     }
@@ -76,6 +77,12 @@ public class EmployeeController {
     @GetMapping("/{id}/dismiss")
     public String dismissEmployee(@PathVariable("id") Long id) {
         employeeService.dismissEmployee(id);
-        return "redirect:/employee/employees";
+        return EMPLOYEES;
+    }
+
+    @GetMapping("/{id}/delete")
+    public String deleteEmployee(@PathVariable("id") Long id) {
+        employeeService.deleteEmployee(id);
+        return EMPLOYEES;
     }
 }

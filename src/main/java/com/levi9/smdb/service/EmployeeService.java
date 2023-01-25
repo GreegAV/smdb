@@ -119,4 +119,13 @@ public class EmployeeService {
             employeeRepository.save(employee);
         }
     }
+
+    public void deleteEmployee(Long id) {
+        Employee employee = getEmployeeById(id);
+        if (employee != null) {
+            employee.setDepartmentId(0L);
+            employee.setEmail(null);
+            employeeRepository.delete(employee);
+        }
+    }
 }
