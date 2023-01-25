@@ -27,6 +27,7 @@ import com.levi9.smdb.service.EmployeeService;
 public class DepartmentController {
 
     private static final String ERROR = "error";
+    private static final String DEPARTMENTS = "redirect:/department/departments";
     private final DepartmentService departmentService;
     private final EmployeeService employeeService;
 
@@ -61,7 +62,7 @@ public class DepartmentController {
         } else {
             return ERROR;
         }
-        return "redirect:/department/departments";
+        return DEPARTMENTS;
     }
 
     @GetMapping("/assigndepartment/{id}")
@@ -101,7 +102,7 @@ public class DepartmentController {
     @PatchMapping("/{id}")
     public String editDepartmentPerform(@ModelAttribute("department") Department department, @PathVariable("id") Long id) {
         if (departmentService.updateDepartment(id, department)) {
-            return "redirect:/department/departments";
+            return DEPARTMENTS;
         }
         return ERROR;
     }
