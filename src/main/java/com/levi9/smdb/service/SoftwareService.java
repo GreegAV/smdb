@@ -59,4 +59,8 @@ public class SoftwareService {
         }
         return false;
     }
+
+    public void deleteSoftware(Long softId) {
+        softwareRepository.delete(getSoftwareById(softId));
+    }
 }

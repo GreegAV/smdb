@@ -28,6 +28,7 @@ import com.levi9.smdb.service.SoftwareService;
 public class SoftwareController {
 
     private static final String ERROR = "error";
+    private static final String SOFTWARE = "redirect:/software/software";
     private final SoftwareService softwareService;
     private final EmployeeService employeeService;
 
@@ -53,7 +54,7 @@ public class SoftwareController {
         } else {
             return ERROR;
         }
-        return "redirect:/software/software";
+        return SOFTWARE;
     }
 
     @GetMapping("/assignsoftware")
@@ -69,8 +70,8 @@ public class SoftwareController {
     }
 
     @GetMapping("/assignsoftware/{id}")
-    public String assignSoftwareForEmployee(@PathVariable("id") Long id, Model model) {
-        Employee employee = employeeService.getEmployeeById(id);
+    public String assignSoftwareForEmployee(@PathVariable("id") Long employeeId, Model model) {
+        Employee employee = employeeService.getEmployeeById(employeeId);
         model.addAttribute("employee", employee);
         List<SoftwareDTO> softList = softwareService.getUnassignedSoftware();
         model.addAttribute("softList", softList);
@@ -93,21 +94,27 @@ public class SoftwareController {
         if (!employeeService.validateAndAssignSoftware(software, employee)) {
             return ERROR;
         }
-        return "redirect:/software/software";
+        return SOFTWARE;
     }
 
     @GetMapping("/{id}/edit")
-    public String editSoftware(@PathVariable("id") Long id, Model model) {
-        Software software = softwareService.getSoftwareById(id);
+    public String editSoftware(@PathVariable("id") Long softId, Model model) {
+        Software software = softwareService.getSoftwareById(softId);
         model.addAttribute("software", software);
         return "/software/edit";
     }
 
     @PatchMapping("/{id}")
-    public String editSoftwarePerform(@ModelAttribute("software") Software software, @PathVariable("id") Long id) {
-        if (softwareService.updateSoftware(id, software)) {
-            return "redirect:/software/software";
+    public String editSoftwarePerform(@ModelAttribute("software") Software software, @PathVariable("id") Long softId) {
+        if (softwareService.updateSoftware(softId, software)) {
+            return SOFTWARE;
         }
         return ERROR;
+    }
+
+    @GetMapping("/{id}/delete")
+    public String deleteSoftware(@PathVariable("id") Long softId) {
+        softwareService.deleteSoftware(softId);
+        return SOFTWARE;
     }
 }

@@ -25,7 +25,9 @@
         <td><a th:href="|/employee/${software.assignedTo}|"><span th:text="${software.assignedName}"></span></a></td>
         <td th:text="${software.serial}"></td>
         <td th:text="${software.freeLicense}"></td>
-        <td><a th:href="|/software/${software.id}/edit|">Edit</a></td>
+        <td>
+            <a th:href="|/software/${software.id}/edit|">Edit</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a th:href="|/software/${software.id}/delete|">Delete</a>
+        </td>
     </tr>
     </tbody>
 </table>
