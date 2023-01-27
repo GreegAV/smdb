@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.5</version>
+		<version>2.7.8</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.levi9</groupId>
@@ -105,8 +105,7 @@
                     <to>
                         <image>registry.hub.docker.com/greegav/benchstudy</image>
                         <auth>
-                            <username>!!!!!!!!!!!!!!!!!!!!!!!!!!</username>
-                            <password>!!!!!!!!!!!!!!!!!!!!!!!!!!!!</password>
+// TODO external auth !!!!!!!!!!!!!
                         </auth>
                     </to>
                     <allowInsecureRegistries>true</allowInsecureRegistries>
