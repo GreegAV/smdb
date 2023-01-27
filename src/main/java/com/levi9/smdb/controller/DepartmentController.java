@@ -2,6 +2,8 @@ package com.levi9.smdb.controller;
 
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,7 @@ import com.levi9.smdb.service.EmployeeService;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/department")
+@Api(description = "Department controller")
 public class DepartmentController {
 
     private static final String ERROR = "error";
@@ -32,6 +35,7 @@ public class DepartmentController {
     private final EmployeeService employeeService;
 
     @GetMapping("/departments")
+    @ApiOperation("List of all departments")
     public String departments(Model model) {
         List<DepartmentDTO> departments = departmentService.getAllDepartments();
         model.addAttribute("departments", departments);
