@@ -29,6 +29,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -46,11 +50,6 @@
 			<scope>test</scope>
 		</dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
 
         <dependency>
             <groupId>javax.validation</groupId>
@@ -105,7 +104,7 @@
                     <to>
                         <image>registry.hub.docker.com/greegav/benchstudy</image>
                         <auth>
-// TODO external auth !!!!!!!!!!!!!
+
                         </auth>
                     </to>
                     <allowInsecureRegistries>true</allowInsecureRegistries>
