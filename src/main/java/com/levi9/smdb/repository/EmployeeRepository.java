@@ -1,6 +1,7 @@
 package com.levi9.smdb.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -21,11 +22,16 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
             + "from employees e left join departments d on e.department_id=d.id where e.id=:id", nativeQuery = true)
     EmployeeDTO getEmployeeById(@Param("id") Long id);
 
-    @Query(value = "select e.id, e.first_name as firstName, e.last_name as lastName, e.email, e.department_id as departmentId "
+    @Query(value = "select e.id, e.first_name as firstName, e.last_name as lastName, e.password, e.email, e.department_id as departmentId "
             + "from employees e where e.department_id= :depId", nativeQuery = true)
     List<Employee> getEmployeesByDepartmentId(@Param("depId") Long depId);
 
     @Query(value = "select exists(select 1 from employees e where e.email = :mail)", nativeQuery = true)
     boolean emailExists(@Param("mail") String mail);
+
+
+    @Query(value = "select e.id, e.first_name as firstName, e.last_name as lastName, e.password, e.email, e.department_id as departmentId "
+            + "from employees e where e.email = :email", nativeQuery = true)
+    Optional<Employee> findByEmail(@Param("email") String email);
 
 }
