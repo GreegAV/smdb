@@ -26,7 +26,7 @@ ALTER TABLE software ADD CONSTRAINT fk_software_employees FOREIGN KEY (assigned_
 
 insert into departments (id,dep_code, dep_name)
 values
-(0,'', '');
+(0,'Unassigned', 'Unassigned');
 
 insert into departments (dep_code, dep_name)
 values
@@ -34,6 +34,10 @@ values
 ('Finance', 'Finance Department'),
 ('HR', 'Human Resources'),
 ('Support', 'Technical Support');
+
+insert into employees (id,first_name, last_name, department_id, email)
+values
+(0,'Admin', 'Admin', 0, 'admin.admin@unassigned.levi9.com');
 
 insert into employees (first_name, last_name, department_id, email)
 values

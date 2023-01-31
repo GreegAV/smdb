@@ -14,7 +14,7 @@ import com.levi9.smdb.entity.Employee;
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
     @Query(value = "select e.id, e.first_name as firstName, e.last_name as lastName, d.dep_name as department, e.email "
-            + "from employees e left join departments d on e.department_id=d.id", nativeQuery = true)
+            + "from employees e left join departments d on e.department_id=d.id where e.id>0", nativeQuery = true)
     List<EmployeeDTO> getAllEmployees();
 
     @Query(value = "select e.id, e.first_name as firstName, e.last_name as lastName, d.dep_name as department, e.email "
