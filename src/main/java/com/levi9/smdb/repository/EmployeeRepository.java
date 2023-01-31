@@ -30,8 +30,8 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     boolean emailExists(@Param("mail") String mail);
 
 
-    @Query(value = "select e.id, e.first_name as firstName, e.last_name as lastName, e.password, e.email, e.department_id as departmentId "
-            + "from employees e where e.email = :email", nativeQuery = true)
-    Optional<Employee> findByEmail(@Param("email") String email);
+    @Query(value = "select e.id, e.first_name as firstName, e.last_name as lastName, e.login, e.password, e.email, e.department_id as departmentId "
+            + "from employees e where e.login = :login", nativeQuery = true)
+    Optional<Employee> findByLogin(@Param("login") String login);
 
 }

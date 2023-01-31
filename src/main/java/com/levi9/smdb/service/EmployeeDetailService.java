@@ -21,9 +21,8 @@ public class EmployeeDetailService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Employee> person = employeeRepository.findByEmail(email);
-        // TODO if employee has no email!!!!!
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        Optional<Employee> person = employeeRepository.findByLogin(login);
         if (person.isEmpty()) {
             throw new UsernameNotFoundException("User not found");
         }

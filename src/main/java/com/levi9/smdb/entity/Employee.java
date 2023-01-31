@@ -41,7 +41,9 @@ public class Employee {
     @Column(name = "department_id")
     @NotEmpty(message = "Employee should work somewhere.")
     private Long departmentId;
-
+    @Column(name = "login")
+    @NotEmpty(message = "Employee should have login.")
+    private String login;
     @Column(name = "password")
     @NotEmpty(message = "Employee should have password.")
     private String password;
