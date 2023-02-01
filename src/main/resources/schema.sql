@@ -14,6 +14,7 @@ last_name varchar,
 department_id int,
 login varchar,
 password varchar,
+is_admin boolean not null default false,
 email varchar);
 
 ALTER TABLE employees ADD CONSTRAINT fk_employees_departments FOREIGN KEY (department_id) REFERENCES departments (id);
@@ -37,17 +38,17 @@ values
 ('HR', 'Human Resources'),
 ('Support', 'Technical Support');
 
-insert into employees (id,first_name, last_name, department_id, login, password, email)
+insert into employees (id,first_name, last_name, department_id, login, password, is_admin, email)
 values
-(0,'Admin', 'Admin', 0, 'admin', 'admin', 'admin.admin@levi9.com');
+(0,'Admin', 'Admin', 0, 'admin', 'admin',  true, 'admin.admin@levi9.com');
 
-insert into employees (first_name, last_name, department_id, login, password, email)
+insert into employees (first_name, last_name, department_id, login, password, is_admin, email)
 values
-('John', 'Dow', 1, 'johndow', 'johndow', 'john.dow@it.levi9.com'),
-('Mary', 'Smith', 2, 'marysmith', 'marysmith', 'marysmith@finance.levi9.com'),
-('Ann', 'Flower', 3, 'annflower', 'annflower',  'ann.flower@hr.levi9.com'),
-('Mike', 'Harder', 4, 'mikeharder', 'mikeharder', 'mike.harder@support.levi9.com'),
-('Alex', 'Trainer', 3, 'alextrainer', 'alextrainer', 'alex.trainer@hr.levi9.com');
+('John', 'Dow', 1, 'johndow', 'johndow', false, 'john.dow@it.levi9.com'),
+('Mary', 'Smith', 2, 'marysmith', 'marysmith', false, 'marysmith@finance.levi9.com'),
+('Ann', 'Flower', 3, 'annflower', 'annflower',  false, 'ann.flower@hr.levi9.com'),
+('Mike', 'Harder', 4, 'mikeharder', 'mikeharder', false, 'mike.harder@support.levi9.com'),
+('Alex', 'Trainer', 3, 'alextrainer', 'alextrainer', false, 'alex.trainer@hr.levi9.com');
 
 insert into software  (soft_name , serial, assigned_to)
 values

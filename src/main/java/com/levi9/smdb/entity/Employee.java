@@ -35,18 +35,26 @@ public class Employee {
     @Column(name = "first_name")
     @NotEmpty(message = "Employee should have first name.")
     private String firstName;
+
     @Column(name = "last_name")
     @NotEmpty(message = "Employee should have last name.")
     private String lastName;
+
     @Column(name = "department_id")
     @NotEmpty(message = "Employee should work somewhere.")
     private Long departmentId;
+
     @Column(name = "login")
     @NotEmpty(message = "Employee should have login.")
     private String login;
+
     @Column(name = "password")
     @NotEmpty(message = "Employee should have password.")
     private String password;
+
+    @Column(name = "is_admin")
+    @NotEmpty(message = "Is employee an admin.")
+    private Boolean isAdmin;
 
     @Column(name = "email")
     @Email
