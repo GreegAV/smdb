@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.levi9.smdb.dto.AssignSoftwareToEmployeeDTO;
 import com.levi9.smdb.dto.EmployeeDTO;
@@ -40,17 +39,19 @@ public class SoftwareController {
     }
 
     @GetMapping("/addsoftware")
-    public String addSoftware() {
+    public String addSoftware(@ModelAttribute("software") Software software) {
         return "/software/addsoftware";
     }
 
     @PostMapping("/addsoftware")
-    public String addSoftwarePerform(@RequestParam("softName") String softName, @RequestParam("serial") String serial) {
+    public String addSoftwarePerform(@ModelAttribute("software") Software software) {
+        String softName = software.getSoftName();
+        String serial = software.getSerial();
         if (softwareService.validateInput(softName, serial)) {
-            Software software = new Software();
-            software.setSoftName(softName);
-            software.setSerial(serial);
-            softwareService.saveNewSoftware(software);
+            Software soft = new Software();
+            soft.setSoftName(softName);
+            soft.setSerial(serial);
+            softwareService.saveNewSoftware(soft);
         } else {
             return ERROR;
         }

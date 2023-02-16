@@ -43,6 +43,7 @@ public class EmployeeService {
             newEmployee.setLastName(employee.getLastName());
             newEmployee.setDepartmentId(null);
             newEmployee.setEmail(null);
+            newEmployee.setIsAdmin(false);
             employeeRepository.save(newEmployee);
             return true;
         }

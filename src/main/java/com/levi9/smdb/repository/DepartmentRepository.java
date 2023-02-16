@@ -21,6 +21,6 @@ public interface DepartmentRepository extends CrudRepository<Department, Long> {
     @Query(value = "select dep_code from departments", nativeQuery = true)
     Set<String> getDepartmentCodes();
 
-    @Query(value = "select d.id, d.dep_name as depName, d.dep_code as depCode from departments d where d.id= :depId", nativeQuery = true)
+    @Query(value = "select d.id, d.dep_code as depCode, d.dep_name as depName from departments d where d.id= :depId", nativeQuery = true)
     Department getDepartmentById(@Param("depId") Long depId);
 }

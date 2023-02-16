@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
     <title>Add a department</title>
@@ -18,9 +18,9 @@
     </thead>
     <tbody>
     <tr>
-        <form method="post" action="/department/adddepartment">
-            <td><input type="text" name="depName" id="depName"></td>
-            <td><input type="text" name="depCode" id="depCode"></td>
+        <form th:method="post" th:action="@{/department/adddepartment}" th:object="${department}">
+            <td><input type="text" th:field="*{depName}" id="depName"></td>
+            <td><input type="text" th:field="*{depCode}" id="depCode"></td>
             <td><input type="submit" value="Add department"></td>
         </form>
     </tr>

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
     <title>Add a software</title>
@@ -18,9 +18,9 @@
     </thead>
     <tbody>
     <tr>
-        <form method="post" action="/software/addsoftware">
-            <td><input type="text" name="softName" id="softName"></td>
-            <td><input type="text" name="serial" id="serial"></td>
+        <form th:method="post" th:action="@{/software/addsoftware}" th:object="${software}">
+            <td><input type="text" th:field="*{softName}" id="softName"></td>
+            <td><input type="text" th:field="*{serial}" id="serial"></td>
             <td><input type="submit" value="Add software"></td>
         </form>
     </tr>

@@ -13,9 +13,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Software Management DataBase</name>
 	<description>Demo project for Spring Boot</description>
-	<properties>
-		<java.version>17</java.version>
-	</properties>
+
+    <properties>
+        <java.version>17</java.version>
+        <mainClass>com.levi9.smdb.SoftwareManagementDataBaseApplication</mainClass>
+        <properties.dir>develop</properties.dir>
+    </properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -84,7 +88,46 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>develop</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>develop</spring.profiles.active>
+                <properties.dir>develop</properties.dir>
+                <appName>${project.artifactId}</appName>
+
+                <flyway.url>jdbc:postgresql://localhost:5432/smdb</flyway.url>
+                <flyway.user>postgres</flyway.user>
+                <flyway.password>postgres</flyway.password>
+                <flyway.locations>classpath:db/migration</flyway.locations>
+                <flyway.baselineOnMigrate>true</flyway.baselineOnMigrate>
+            </properties>
+        </profile>
+        <!--        <profile>-->
+        <!--            <id>test</id>-->
+        <!--            <activation>-->
+        <!--                <activeByDefault>false</activeByDefault>-->
+        <!--            </activation>-->
+        <!--            <properties>-->
+        <!--                <spring.profiles.active>test</spring.profiles.active>-->
+        <!--                <properties.dir>test</properties.dir>-->
+        <!--                <appName>${project.artifactId}</appName>-->
+
+        <!--                <flyway.url>jdbc:postgresql://localhost:8115/verifier_db</flyway.url>-->
+        <!--                <flyway.user>verifier_db</flyway.user>-->
+        <!--                <flyway.password>verifier_db</flyway.password>-->
+        <!--                <flyway.locations>classpath:db/migration</flyway.locations>-->
+        <!--                <flyway.baselineVersion>2.3.0.1</flyway.baselineVersion>-->
+        <!--                <flyway.baselineOnMigrate>true</flyway.baselineOnMigrate>-->
+        <!--            </properties>-->
+        <!--        </profile>-->
+    </profiles>
+
 	<build>
+        <finalName>${appName}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -113,6 +156,20 @@
                 </configuration>
             </plugin>
 		</plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources/</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>db/migration/**</include>
+<!--                    <include>logback-spring.xml</include>-->
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/${properties.dir}</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
 	</build>
 
 </project>
