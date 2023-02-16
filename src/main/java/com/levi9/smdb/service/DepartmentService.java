@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import org.springframework.stereotype.Service;
 
 import com.levi9.smdb.dto.DepartmentDTO;
+import com.levi9.smdb.dto.DeptDTO;
 import com.levi9.smdb.entity.Department;
 import com.levi9.smdb.repository.DepartmentRepository;
 
@@ -51,7 +52,7 @@ public class DepartmentService {
         return departmentRepository.getDepartmentById(departmentId);
     }
 
-    public boolean updateDepartment(Long deptId, Department department) {
+    public boolean updateDepartment(Long deptId, DeptDTO department) {
         if (validateInput(department.getDepName(), department.getDepCode())) {
             Department updateDepartment = departmentRepository.getDepartmentById(deptId);
             updateDepartment.setDepCode(department.getDepCode());

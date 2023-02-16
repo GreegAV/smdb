@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.levi9.smdb.dto.AssignDepartmentToEmployeeDTO;
 import com.levi9.smdb.dto.DepartmentDTO;
+import com.levi9.smdb.dto.DeptDTO;
 import com.levi9.smdb.entity.Department;
 import com.levi9.smdb.entity.Employee;
 import com.levi9.smdb.service.DepartmentService;
@@ -51,12 +52,12 @@ public class DepartmentController {
     }
 
     @GetMapping("/adddepartment")
-    public String adddepartment(@ModelAttribute("department") Department department) {
+    public String adddepartment(@ModelAttribute("department") DeptDTO department) {
         return "/department/adddepartment";
     }
 
     @PostMapping("/adddepartment")
-    public String addDepartmentPerform(@ModelAttribute("department") Department department) {
+    public String addDepartmentPerform(@ModelAttribute("department") DeptDTO department) {
         String depName = department.getDepName();
         String depCode = department.getDepCode();
         if (departmentService.validateInput(depName, depCode)) {
@@ -106,7 +107,7 @@ public class DepartmentController {
     }
 
     @PatchMapping("/{id}")
-    public String editDepartmentPerform(@ModelAttribute("department") Department department, @PathVariable("id") Long id) {
+    public String editDepartmentPerform(@ModelAttribute("department") DeptDTO department, @PathVariable("id") Long id) {
         if (departmentService.updateDepartment(id, department)) {
             return DEPARTMENTS;
         }
