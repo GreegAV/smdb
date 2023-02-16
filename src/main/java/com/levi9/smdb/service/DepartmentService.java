@@ -61,4 +61,8 @@ public class DepartmentService {
         }
         return false;
     }
+
+    public void deleteDepartment(Long deptId) {
+        departmentRepository.delete(getDepartmentById(deptId));
+    }
 }

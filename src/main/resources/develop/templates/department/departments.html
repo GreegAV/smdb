@@ -23,7 +23,10 @@
         <td th:text="${department.depCode}">Department code</td>
         <td th:text="${department.depName}">Department name</td>
         <td th:text="${department.working}" align="center">Work here</td>
-        <td><a th:href="|/department/${department.id}|">Details</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a th:href="|/department/${department.id}/edit|">Edit</a></td>
+        <td><a th:href="|/department/${department.id}|">Details</a>&nbsp;&nbsp;
+            |&nbsp;&nbsp;<a th:href="|/department/${department.id}/edit|">Edit</a>
+            |&nbsp;&nbsp;<a th:href="|/department/${department.id}/delete|">Delete</a>
+        </td>
     </tr>
     </tbody>
 </table>

@@ -112,4 +112,10 @@ public class DepartmentController {
         }
         return ERROR;
     }
+
+    @GetMapping("/{id}/delete")
+    public String deleteDepartment(@PathVariable("id") Long deptId) {
+        departmentService.deleteDepartment(deptId);
+        return DEPARTMENTS;
+    }
 }
