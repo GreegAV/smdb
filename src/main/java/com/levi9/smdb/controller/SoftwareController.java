@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.levi9.smdb.dto.AssignSoftwareToEmployeeDTO;
 import com.levi9.smdb.dto.EmployeeDTO;
+import com.levi9.smdb.dto.SoftDTO;
 import com.levi9.smdb.dto.SoftwareDTO;
 import com.levi9.smdb.entity.Employee;
 import com.levi9.smdb.entity.Software;
@@ -39,12 +40,12 @@ public class SoftwareController {
     }
 
     @GetMapping("/addsoftware")
-    public String addSoftware(@ModelAttribute("software") Software software) {
+    public String addSoftware(@ModelAttribute("software") SoftDTO software) {
         return "/software/addsoftware";
     }
 
     @PostMapping("/addsoftware")
-    public String addSoftwarePerform(@ModelAttribute("software") Software software) {
+    public String addSoftwarePerform(@ModelAttribute("software") SoftDTO software) {
         String softName = software.getSoftName();
         String serial = software.getSerial();
         if (softwareService.validateInput(softName, serial)) {
@@ -63,7 +64,7 @@ public class SoftwareController {
         List<EmployeeDTO> employees = employeeService.getAllEmployees();
         model.addAttribute("employees", employees);
         List<SoftwareDTO> softList = softwareService.getUnassignedSoftware();
-        model.addAttribute("softList", softList);
+        model.addAttribute("softwareList", softList);
 
         model.addAttribute("soft2empl", new AssignSoftwareToEmployeeDTO());
 
@@ -92,7 +93,7 @@ public class SoftwareController {
         if (soft2empl.getEmployeeId() != null) {
             employee = employeeService.getEmployeeById(soft2empl.getEmployeeId());
         }
-        if (!employeeService.validateAndAssignSoftware(software, employee)) {
+        if (software == null || employee == null || !employeeService.validateAndAssignSoftware(software, employee)) {
             return ERROR;
         }
         return SOFTWARE;
@@ -106,7 +107,7 @@ public class SoftwareController {
     }
 
     @PatchMapping("/{id}")
-    public String editSoftwarePerform(@ModelAttribute("software") Software software, @PathVariable("id") Long softId) {
+    public String editSoftwarePerform(@ModelAttribute("software") SoftDTO software, @PathVariable("id") Long softId) {
         if (softwareService.updateSoftware(softId, software)) {
             return SOFTWARE;
         }

@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
 
+import com.levi9.smdb.dto.SoftDTO;
 import com.levi9.smdb.dto.SoftwareDTO;
 import com.levi9.smdb.entity.Software;
 import com.levi9.smdb.repository.SoftwareRepository;
@@ -49,7 +50,7 @@ public class SoftwareService {
         return softwareRepository.findSoftwareById(id);
     }
 
-    public boolean updateSoftware(Long softId, Software software) {
+    public boolean updateSoftware(Long softId, SoftDTO software) {
         if (validateInput(software.getSoftName(), software.getSerial())) {
             Software updateSoftware = softwareRepository.findSoftwareById(softId);
             updateSoftware.setSoftName(software.getSoftName());

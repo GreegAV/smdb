@@ -23,7 +23,7 @@
                 <div>
                     <select th:field="*{softwareId}">
                         <option value="0">Select a software</option>
-                        <option th:each="soft : ${softList}"
+                        <option th:each="soft : ${softwareList}"
                                 th:text="${soft.softName}"
                                 th:value="${soft.id}"></option>
                     </select>
