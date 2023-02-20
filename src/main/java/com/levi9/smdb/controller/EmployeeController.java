@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.levi9.smdb.dto.EmpDTO;
 import com.levi9.smdb.dto.EmployeeDTO;
 import com.levi9.smdb.dto.SoftwareDTO;
 import com.levi9.smdb.entity.Employee;
@@ -46,12 +47,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/addemployee")
-    public String addEmployee(@ModelAttribute("employee") Employee employee) {
+    public String addEmployee(@ModelAttribute("employee") EmpDTO employee) {
         return "/employee/addemployee";
     }
 
     @PostMapping("/addemployee")
-    public String addEmployeePerform(@ModelAttribute("employee") Employee employee) {
+    public String addEmployeePerform(@ModelAttribute("employee") EmpDTO employee) {
         if (employeeService.saveNewEmployee(employee)) {
             return EMPLOYEES;
         } else {
@@ -67,7 +68,7 @@ public class EmployeeController {
     }
 
     @PatchMapping("/{id}")
-    public String editEmployeePerform(@ModelAttribute("employee") Employee employee, @PathVariable("id") Long id) {
+    public String editEmployeePerform(@ModelAttribute("employee") EmpDTO employee, @PathVariable("id") Long id) {
         if (employeeService.updateEmployee(id, employee)) {
             return EMPLOYEES;
         }

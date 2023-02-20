@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
+import com.levi9.smdb.dto.EmpDTO;
 import com.levi9.smdb.dto.EmployeeDTO;
 import com.levi9.smdb.entity.Department;
 import com.levi9.smdb.entity.Employee;
@@ -36,7 +37,7 @@ public class EmployeeService {
         return !firstName.isEmpty() && !lastName.isEmpty() && Pattern.matches(word, firstName) && Pattern.matches(word, lastName);
     }
 
-    public boolean saveNewEmployee(Employee employee) {
+    public boolean saveNewEmployee(EmpDTO employee) {
         Employee newEmployee = new Employee();
         if (validateInput(employee.getFirstName(), employee.getLastName())) {
             newEmployee.setFirstName(employee.getFirstName());
@@ -95,7 +96,7 @@ public class EmployeeService {
         return email1part + "." + emp.getId() + emailLastPart;
     }
 
-    public boolean updateEmployee(Long id, Employee employee) {
+    public boolean updateEmployee(Long id, EmpDTO employee) {
         if (validateInput(employee.getFirstName(), employee.getLastName())) {
             Employee updateEmployee = getEmployeeById(id);
             updateEmployee.setFirstName(employee.getFirstName());
