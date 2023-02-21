@@ -32,7 +32,7 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
 //    @Query(value = "select e.id, e.first_name as firstName, e.last_name as lastName, e.login, e.password, e.is_admin as isAdmin, e.email, e.department_id as departmentId "
 //            + "from employees e where e.login = :login", nativeQuery = true)
-     @Query(value = "select * from employees e where e.login = :login", nativeQuery = true)
+     @Query("select e from Employee e where e.login = :login")
     Optional<Employee> findByLogin(@Param("login") String login);
 
 }
