@@ -4,14 +4,15 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.levi9.smdb.entity.Employee;
 import com.levi9.smdb.integration.core.BaseIntegrationTest;
 import com.levi9.smdb.repository.EmployeeRepository;
 
-@SpringBootTest
+@ExtendWith(SpringExtension.class)
 class EmployeeRepositoryTest extends BaseIntegrationTest {
 
     @Autowired
