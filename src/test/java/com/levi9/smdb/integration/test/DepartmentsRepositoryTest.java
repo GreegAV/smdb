@@ -1,16 +1,20 @@
 package com.levi9.smdb.integration.test;
 
-import static org.junit.Assert.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.levi9.smdb.entity.Department;
 import com.levi9.smdb.integration.core.BaseIntegrationTest;
 import com.levi9.smdb.repository.DepartmentRepository;
 
-@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@Sql(scripts = {"classpath:/db/dataset/change_department_name.sql"})
 class DepartmentsRepositoryTest extends BaseIntegrationTest {
 
     @Autowired

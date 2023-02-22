@@ -33,7 +33,7 @@ public class BaseIntegrationTest {
     }
 
     @Test
-    void test() {
+    void validIfContainerIsRunning() {
         Assertions.assertTrue(postgresqlContainer.isRunning());
     }
 }
