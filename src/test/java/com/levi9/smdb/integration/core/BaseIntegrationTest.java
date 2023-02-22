@@ -20,8 +20,10 @@ public class BaseIntegrationTest {
     public static final PostgreSQLContainer postgresqlContainer;
 
     static {
-        postgresqlContainer = new PostgreSQLContainer(DOCKER_IMAGE_NAME).withDatabaseName(DATABASE_NAME).withPassword(DATABASE_PASSWORD)
-                .withUsername(DATABASE_USERNAME);
+        postgresqlContainer = new PostgreSQLContainer(DOCKER_IMAGE_NAME)
+                .withDatabaseName(DATABASE_NAME)
+                .withUsername(DATABASE_USERNAME)
+                .withPassword(DATABASE_PASSWORD);
         postgresqlContainer.start();
     }
 
